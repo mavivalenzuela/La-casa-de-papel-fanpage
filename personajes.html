@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personajes | La Casa de Papel - Expedientes de la Banda</title>
+  <meta name="description" content="Conoce los integrantes de La Banda, la Policía y los Rehenes de La Casa de Papel con sus expedientes y biografías completas.">
+  
+  <!-- FontAwesome Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Hojas de Estilo CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & MENÚ DE NAVEGACIÓN PRINCIPAL
+       ========================================== -->
+  <header class="site-header" id="header">
+    <div class="header-container">
+      
+      <!-- Marca / Logo -->
+      <a href="index.html" class="brand-logo">
+        <span class="brand-badge">LCDP</span>
+        <span>LA CASA DE PAPEL</span>
+      </a>
+
+      <!-- Menú Navegación Principal Flexbox -->
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list" id="navList">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Inicio</a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="personajes.html" class="nav-link active">Personajes</a>
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a href="temporadas.html" class="nav-link">
+              Temporadas <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=1" class="dropdown-link">
+                  <span>Parte 1: El Comienzo</span> <i class="fa-solid fa-vault"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=2" class="dropdown-link">
+                  <span>Parte 2: El Escape</span> <i class="fa-solid fa-money-bill-wave"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=3" class="dropdown-link">
+                  <span>Parte 3: El Banco de España</span> <i class="fa-solid fa-building-columns"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=4" class="dropdown-link">
+                  <span>Parte 4: El Caos</span> <i class="fa-solid fa-bomb"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=5" class="dropdown-link">
+                  <span>Parte 5: La Guerra</span> <i class="fa-solid fa-shield-halved"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="plan.html" class="nav-link">El Plan</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="resistencia.html" class="nav-link">La Resistencia</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Botones de Acción / Himno Header -->
+      <div class="header-actions">
+        <button class="sound-btn" id="soundToggle" title="Activar Himno de la Resistencia">
+          <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+          <span>Bella Ciao</span>
+        </button>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================
+       CONTENEDOR PRINCIPAL MAIN (ANCHO Y MÁRGENES)
+       ========================================== -->
+  <main>
+    
+    <!-- Banner de Encabezado de Página -->
+    <section class="page-hero">
+      <span class="section-tag"><i class="fa-solid fa-folder-open"></i> Archivos Confidenciales</span>
+      <h1 class="section-title">INTEGRANTES Y PROTAGONISTAS</h1>
+      <p class="section-subtitle">
+        Cada miembro fue seleccionado por El Profesor. Explora el expediente completo de La Banda, la Policía y los Rehenes clave.
+      </p>
+    </section>
+
+    <!-- Filtros de Personajes (Flexbox Layout) -->
+    <section class="section">
+      <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="banda">La Banda</button>
+        <button class="filter-btn" data-filter="ley">Policía y Ley</button>
+        <button class="filter-btn" data-filter="rehenes">Rehenes Clave</button>
+      </div>
+
+      <!-- Grilla de Tarjetas Dinámica -->
+      <div class="character-grid" id="characterGrid">
+        <!-- Inyectado dinámicamente mediante Javascript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       VENTANA MODAL DE DETALLES DE PERSONAJE
+       ========================================== -->
+  <div class="modal-overlay" id="characterModal">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Cerrar Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-media">
+        <img src="" alt="Personaje" class="modal-img" id="modalImg">
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-header">
+          <span class="modal-role-badge" id="modalRole">Líder Estratégico</span>
+          <h2 class="modal-codename" id="modalCodename">EL PROFESOR</h2>
+          <span class="modal-realname" id="modalRealname">Sergio Marquina</span>
+        </div>
+
+        <p class="modal-bio" id="modalBio">
+          Cerebro maestro tras los atracos a la Fábrica Nacional de Moneda y Timbre y al Banco de España. Inteligencia superior y frialdad táctica.
+        </p>
+
+        <div class="modal-quote-block">
+          <p id="modalQuote">"Lo importante no es lo que nos pase, sino lo que vamos a hacer con ello."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FOOTER CON REDES SOCIALES (FA ICONS)
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="brand-badge">LCDP</span>
+            <span>LA CASA DE PAPEL</span>
+          </div>
+          <p class="footer-desc">
+            Página web dedicada a la serie "La Casa de Papel". Desarrollada para Programación IV utilizando HTML5, CSS3 con Flexbox, JavaScript ES6 y PHP.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4 class="footer-col-title">Navegación</h4>
+            <div class="footer-menu">
+              <a href="index.html">Inicio</a>
+              <a href="personajes.html">Personajes</a>
+              <a href="temporadas.html">Resumen de Temporadas</a>
+              <a href="plan.html">El Plan Maestro</a>
+              <a href="resistencia.html">La Resistencia</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-col-title">Lugares Icónicos</h4>
+            <div class="footer-menu">
+              <a href="temporadas.html?parte=1">F.N.M.T. Madrid</a>
+              <a href="temporadas.html?parte=3">Banco de España</a>
+              <a href="plan.html">Finca de Toledo</a>
+            </div>
+          </div>
+
+          <!-- Redes Sociales desde FontAwesome -->
+          <div class="footer-col footer-social-section">
+            <h4 class="footer-col-title">Canales de la Banda</h4>
+            <div class="footer-social-links">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub de La Resistencia">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="Instagram Oficial">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn Profesional">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 La Casa de Papel Fan Project. Todos los derechos reservados.</p>
+        <p>Hecho con <i class="fa-solid fa-heart" style="color: var(--color-primary-red);"></i> para La Resistencia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script JavaScript Principal -->
+  <script src="script.js"></script>
+</body>
+</html>

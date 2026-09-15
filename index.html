@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Casa de Papel | Sitio Oficial Fan Experience</title>
+  <meta name="description"
+    content="Explora el universo de La Casa de Papel (Money Heist). Descubre la biografía de los personajes de La Banda, el resumen de las 5 temporadas y los planes del Profesor.">
+
+  <!-- FontAwesome Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Hojas de Estilo CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ==========================================
+       HEADER & MENÚ DE NAVEGACIÓN PRINCIPAL
+       ========================================== -->
+  <header class="site-header" id="header">
+    <div class="header-container">
+
+      <!-- Marca / Logo -->
+      <a href="index.html" class="brand-logo">
+        <span class="brand-badge">LCDP</span>
+        <span>LA CASA DE PAPEL</span>
+      </a>
+
+      <!-- Menú Navegación Principal Flexbox -->
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list" id="navList">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link active">Inicio</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="personajes.html" class="nav-link">Personajes</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a href="temporadas.html" class="nav-link">
+              Temporadas <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=1" class="dropdown-link">
+                  <span>Parte 1: El Comienzo</span> <i class="fa-solid fa-vault"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=2" class="dropdown-link">
+                  <span>Parte 2: El Escape</span> <i class="fa-solid fa-money-bill-wave"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=3" class="dropdown-link">
+                  <span>Parte 3: El Banco de España</span> <i class="fa-solid fa-building-columns"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=4" class="dropdown-link">
+                  <span>Parte 4: El Caos</span> <i class="fa-solid fa-bomb"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=5" class="dropdown-link">
+                  <span>Parte 5: La Guerra</span> <i class="fa-solid fa-shield-halved"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="plan.html" class="nav-link">El Plan</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="resistencia.html" class="nav-link">La Resistencia</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Botones de Acción / Himno Header -->
+      <div class="header-actions">
+        <button class="sound-btn" id="soundToggle" title="Activar Himno de la Resistencia">
+          <i class="fa-solid fa-volume-high" id="soundIcon"></i>
+          <span>Bella Ciao</span>
+        </button>
+
+        <!-- Botón Menú Hamburguesa Móvil -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================
+       CONTENEDOR PRINCIPAL MAIN (ANCHO CONTENIDO Y MÁRGENES)
+       ========================================== -->
+  <main>
+
+    <!-- Hero Banner -->
+    <section class="hero" id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-tag">
+          <i class="fa-solid fa-masks-theater"></i>
+          <span>Empieza el Matriarcado</span>
+        </div>
+        <h1 class="hero-title">
+          EL ATRACO MÁS GRANDE DE LA <span>HISTORIA</span>
+        </h1>
+        <p class="hero-subtitle">
+          Bienvenido a la experiencia definitiva de La Casa de Papel. Conoce a los integrantes de la banda, repasa los
+          planes del Profesor y descubre el resumen detallado de cada temporada.
+        </p>
+
+        <div class="hero-actions">
+          <a href="personajes.html" class="btn-primary">
+            <i class="fa-solid fa-users-gear"></i> Ver Personajes
+          </a>
+          <a href="temporadas.html" class="btn-secondary">
+            <i class="fa-solid fa-film"></i> Resumen de Temporadas
+          </a>
+        </div>
+
+        <!-- Estadísticas Rápidas -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">2.400M €</span>
+            <span class="stat-label">Botín F.N.M.T.</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">90 Ton.</span>
+            <span class="stat-label">Oro Banco de España</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">5 Partes</span>
+            <span class="stat-label">41 Episodios</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">1 Banda</span>
+            <span class="stat-label">La Resistencia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Módulos de Acceso Directo (Navegación entre páginas) -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-tag">Explora la Base de Operaciones</span>
+        <h2 class="section-title">SECCIONES PRINCIPALES</h2>
+        <p class="section-subtitle">
+          Ingresa a cada archivo táctico para conocer a fondo la historia, los planes y los rostros de La Resistencia.
+        </p>
+      </div>
+
+      <div class="preview-grid">
+        <div class="preview-card">
+          <div class="preview-icon">
+            <i class="fa-solid fa-id-card-clip"></i>
+          </div>
+          <h3 class="preview-title">PERSONAJES</h3>
+          <p class="preview-desc">
+            Expedientes clasificados de Tokio, Berlín, El Profesor, la Policía y los rehenes clave con sus biografías
+            completas.
+          </p>
+          <a href="personajes.html" class="preview-link">
+            <span>Ver Integrantes</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-icon">
+            <i class="fa-solid fa-clapperboard"></i>
+          </div>
+          <h3 class="preview-title">TEMPORADAS</h3>
+          <p class="preview-desc">
+            Cronología de las 5 partes, desde la Fábrica de Moneda y Timbre hasta el asalto y huida final del Banco de
+            España.
+          </p>
+          <a href="temporadas.html" class="preview-link">
+            <span>Ver Cronología</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-icon">
+            <i class="fa-solid fa-chess-knight"></i>
+          </div>
+          <h3 class="preview-title">EL PLAN</h3>
+          <p class="preview-desc">
+            Las reglas inviolables impuestas por Sergio Marquina: sin nombres reales, sin sangre y ganando la opinión
+            pública.
+          </p>
+          <a href="plan.html" class="preview-link">
+            <span>Ver Estrategia</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-icon">
+            <i class="fa-solid fa-bullhorn"></i>
+          </div>
+          <h3 class="preview-title">LA RESISTENCIA</h3>
+          <p class="preview-desc">
+            Frases memorables, el himno libertario Bella Ciao y la filosofía detrás del mono rojo y la máscara de Dalí.
+          </p>
+          <a href="resistencia.html" class="preview-link">
+            <span>Ver Filosofía</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       BOTÓN FLOTANTE ESTILO MONEDA DE ORO (BANCO DE ESPAÑA / LCDP)
+       ========================================================================== -->
+  <button class="floating-coin-btn" id="openFeedbackBtn" title="Buzón de Devoluciones & Mejoras">
+    <div class="coin-rim">
+      <div class="coin-face">
+        <i class="fa-solid fa-masks-theater coin-icon"></i>
+        <span class="coin-text">LCDP</span>
+      </div>
+    </div>
+    <span class="coin-tooltip">Contacto & Mejoras</span>
+  </button>
+
+  <!-- ==========================================================================
+       MODAL DE CONTACTO & DEVOLUCIONES (PROCESADO POR PHP)
+       ========================================================================== -->
+  <div class="feedback-modal-overlay" id="feedbackModal">
+    <div class="feedback-modal-card">
+      <button class="modal-close-btn" id="feedbackModalClose" aria-label="Cerrar Formulario">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="feedback-header">
+        <span class="feedback-serial-badge"><i class="fa-solid fa-fingerprint"></i> TRANSMISIÓN CIFRADA A LA
+          GUARIDA</span>
+        <h2 class="feedback-title">DEVOLUCIONES & MEJORAS</h2>
+        <p class="feedback-subtitle">
+          Envía sugerencias, reportes o mensajes para perfeccionar el plan táctico de la web.
+        </p>
+      </div>
+
+      <!-- Estado de Respuesta Dinámica -->
+      <div class="feedback-status" id="feedbackStatus"></div>
+
+      <!-- Formulario con destino a contacto.php -->
+      <form class="feedback-form" id="feedbackForm" action="contacto.php" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Alias o Nombre de Operación</label>
+          <input type="text" id="nombre" name="nombre" class="form-input"
+            placeholder="Ej: Río, Marsella, o tu nombre..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Canal Seguro (Correo Electrónico)</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="tu-correo@resistencia.com"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tipo">Tipo de Devolución</label>
+          <select id="tipo" name="tipo" class="form-select">
+            <option value="Propuesta de Mejora">Propuesta de Mejora Táctica</option>
+            <option value="Reporte de Error">Reporte de Error o Bug</option>
+            <option value="Sugerencia de Contenido">Sugerencia de Contenido</option>
+            <option value="Mensaje para La Banda">Mensaje para La Banda</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="mensaje">Detalle de tu Mensaje</label>
+          <textarea id="mensaje" name="mensaje" class="form-textarea" rows="4"
+            placeholder="Escribe aquí tu devolución o mejora para la página..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitFeedbackBtn"
+          style="justify-content: center; width: 100%; margin-top: 0.5rem;">
+          <i class="fa-solid fa-paper-plane"></i> Enviar al Profesor
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FOOTER CON REDES SOCIALES (FA ICONS)
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="brand-badge">LCDP</span>
+            <span>LA CASA DE PAPEL</span>
+          </div>
+          <p class="footer-desc">
+            Página web dedicada a la mítica serie de televisión española "La Casa de Papel". Desarrollada para
+            Programación IV utilizando HTML5, CSS3 con maquetación Flexbox, JavaScript ES6 y PHP.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4 class="footer-col-title">Navegación</h4>
+            <div class="footer-menu">
+              <a href="index.html">Inicio</a>
+              <a href="personajes.html">Personajes</a>
+              <a href="temporadas.html">Resumen de Temporadas</a>
+              <a href="plan.html">El Plan Maestro</a>
+              <a href="resistencia.html">La Resistencia</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-col-title">Lugares Icónicos</h4>
+            <div class="footer-menu">
+              <a href="temporadas.html?parte=1">F.N.M.T. Madrid</a>
+              <a href="temporadas.html?parte=3">Banco de España</a>
+              <a href="plan.html">Finca de Toledo</a>
+            </div>
+          </div>
+
+          <!-- Redes Sociales desde FontAwesome -->
+          <div class="footer-col footer-social-section">
+            <h4 class="footer-col-title">Canales de la Banda</h4>
+            <div class="footer-social-links">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="GitHub de La Resistencia">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="Instagram Oficial">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="LinkedIn Profesional">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 La Casa de Papel Fan Project. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script JavaScript Principal -->
+  <script src="script.js"></script>
+</body>
+
+</html>
