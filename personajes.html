@@ -124,9 +124,26 @@
         <button class="filter-btn" data-filter="rehenes">Rehenes Clave</button>
       </div>
 
-      <!-- Grilla de Tarjetas Dinámica -->
-      <div class="character-grid" id="characterGrid">
-        <!-- Inyectado dinámicamente mediante Javascript -->
+      <!-- Carrusel de Personajes con Flechas de Desplazamiento -->
+      <div class="carousel-container">
+        <button class="carousel-control-btn prev" id="carouselPrevBtn" aria-label="Desplazar a la izquierda" title="Desplazar a la izquierda">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="character-carousel-viewport" id="carouselViewport">
+          <div class="character-grid" id="characterGrid">
+            <!-- Inyectado dinámicamente mediante Javascript -->
+          </div>
+        </div>
+
+        <button class="carousel-control-btn next" id="carouselNextBtn" aria-label="Desplazar a la derecha" title="Desplazar a la derecha">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="carousel-hint">
+        <i class="fa-solid fa-arrows-left-right"></i>
+        <span>Usa los botones de flecha para explorar todos los personajes</span>
       </div>
     </section>
 

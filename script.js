@@ -245,7 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      card.addEventListener('click', () => openCharacterModal(char));
+      card.addEventListener('click', () => {
+        card.classList.add('jumping');
+        setTimeout(() => {
+          openCharacterModal(char);
+          card.classList.remove('jumping');
+        }, 300);
+      });
       characterGrid.appendChild(card);
     });
   }
@@ -310,11 +316,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const modalOverlay = document.getElementById('characterModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const carouselViewport = document.getElementById('carouselViewport');
+    const prevBtn = document.getElementById('carouselPrevBtn');
+    const nextBtn = document.getElementById('carouselNextBtn');
 
     if (modalCloseBtn) modalCloseBtn.onclick = closeCharacterModal;
     if (modalOverlay) {
       modalOverlay.onclick = (e) => {
         if (e.target === modalOverlay) closeCharacterModal();
+      };
+    }
+
+    function updateCarouselArrows() {
+      if (!carouselViewport || !prevBtn || !nextBtn) return;
+      const scrollLeft = carouselViewport.scrollLeft;
+      const maxScroll = carouselViewport.scrollWidth - carouselViewport.clientWidth;
+
+      prevBtn.style.opacity = scrollLeft <= 8 ? '0.35' : '1';
+      prevBtn.style.pointerEvents = scrollLeft <= 8 ? 'none' : 'all';
+
+      nextBtn.style.opacity = scrollLeft >= maxScroll - 8 ? '0.35' : '1';
+      nextBtn.style.pointerEvents = scrollLeft >= maxScroll - 8 ? 'none' : 'all';
+    }
+
+    if (carouselViewport && prevBtn && nextBtn) {
+      const scrollDistance = 240;
+
+      prevBtn.onclick = () => {
+        carouselViewport.scrollBy({ left: -scrollDistance, behavior: 'smooth' });
+      };
+
+      nextBtn.onclick = () => {
+        carouselViewport.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+      };
+
+      carouselViewport.onscroll = () => {
+        updateCarouselArrows();
       };
     }
 
@@ -325,12 +362,17 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.classList.add('active');
           const filterValue = btn.getAttribute('data-filter');
           renderCharacters(filterValue);
+          if (carouselViewport) {
+            carouselViewport.scrollTo({ left: 0, behavior: 'smooth' });
+          }
+          setTimeout(updateCarouselArrows, 120);
         };
       });
     }
 
     if (characterGrid) {
       renderCharacters('all');
+      setTimeout(updateCarouselArrows, 150);
     }
   }
 
