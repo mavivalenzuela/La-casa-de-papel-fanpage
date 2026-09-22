@@ -210,18 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* --- LÓGICA DE PERSONAJES (SI EXISTEN EN EL DOM) --- */
-  const characterGrid = document.getElementById('characterGrid');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const modalOverlay = document.getElementById('characterModal');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
-  const modalImg = document.getElementById('modalImg');
-  const modalCodename = document.getElementById('modalCodename');
-  const modalRealname = document.getElementById('modalRealname');
-  const modalRole = document.getElementById('modalRole');
-  const modalBio = document.getElementById('modalBio');
-  const modalQuote = document.getElementById('modalQuote');
-
   function renderCharacters(filter = 'all') {
+    const characterGrid = document.getElementById('characterGrid');
     if (!characterGrid) return;
     characterGrid.innerHTML = '';
 
@@ -261,30 +251,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function openCharacterModal(char) {
-    if (!modalOverlay) return;
-    const modalMedia = modalImg.parentNode;
-    let placeholder = document.getElementById('modalImgPlaceholder');
+    const modalOverlay = document.getElementById('characterModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalCodename = document.getElementById('modalCodename');
+    const modalRealname = document.getElementById('modalRealname');
+    const modalRole = document.getElementById('modalRole');
+    const modalBio = document.getElementById('modalBio');
+    const modalQuote = document.getElementById('modalQuote');
 
-    if (char.image) {
-      modalImg.src = char.image;
-      modalImg.alt = char.codename;
-      modalImg.style.display = 'block';
-      if (placeholder) placeholder.style.display = 'none';
-    } else {
-      modalImg.style.display = 'none';
-      if (!placeholder) {
-        placeholder = document.createElement('div');
-        placeholder.id = 'modalImgPlaceholder';
-        placeholder.className = 'card-image-placeholder';
-        placeholder.style.height = '100%';
-        placeholder.style.minHeight = '280px';
-        placeholder.innerHTML = `
-          <i class="fa-solid fa-image" style="font-size: 2.2rem; color: var(--color-border-glow);"></i>
-          <span style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.4rem;">[ Imagen no disponible ]</span>
-        `;
-        modalMedia.appendChild(placeholder);
+    if (!modalOverlay) return;
+
+    if (modalImg) {
+      const modalMedia = modalImg.parentNode;
+      let placeholder = document.getElementById('modalImgPlaceholder');
+
+      if (char.image) {
+        modalImg.src = char.image;
+        modalImg.alt = char.codename;
+        modalImg.style.display = 'block';
+        if (placeholder) placeholder.style.display = 'none';
+      } else {
+        modalImg.style.display = 'none';
+        if (!placeholder && modalMedia) {
+          placeholder = document.createElement('div');
+          placeholder.id = 'modalImgPlaceholder';
+          placeholder.className = 'card-image-placeholder';
+          placeholder.style.height = '100%';
+          placeholder.style.minHeight = '280px';
+          placeholder.innerHTML = `
+            <i class="fa-solid fa-image" style="font-size: 2.2rem; color: var(--color-border-glow);"></i>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.4rem;">[ Imagen no disponible ]</span>
+          `;
+          modalMedia.appendChild(placeholder);
+        }
+        if (placeholder) placeholder.style.display = 'flex';
       }
-      placeholder.style.display = 'flex';
     }
 
     if (modalCodename) modalCodename.textContent = char.codename;
@@ -298,38 +299,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeCharacterModal() {
+    const modalOverlay = document.getElementById('characterModal');
     if (!modalOverlay) return;
     modalOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeCharacterModal);
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeCharacterModal();
-    });
-  }
+  function initCharacters() {
+    const characterGrid = document.getElementById('characterGrid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const modalOverlay = document.getElementById('characterModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
 
-  if (filterBtns.length > 0) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filterValue = btn.getAttribute('data-filter');
-        renderCharacters(filterValue);
+    if (modalCloseBtn) modalCloseBtn.onclick = closeCharacterModal;
+    if (modalOverlay) {
+      modalOverlay.onclick = (e) => {
+        if (e.target === modalOverlay) closeCharacterModal();
+      };
+    }
+
+    if (filterBtns.length > 0) {
+      filterBtns.forEach(btn => {
+        btn.onclick = () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filterValue = btn.getAttribute('data-filter');
+          renderCharacters(filterValue);
+        };
       });
-    });
+    }
+
+    if (characterGrid) {
+      renderCharacters('all');
+    }
   }
 
-  if (characterGrid) {
-    renderCharacters('all');
-  }
-
-  /* --- LÓGICA DE TEMPORADAS (SI EXISTEN EN EL DOM) --- */
-  const seasonTabs = document.querySelectorAll('.season-tab-btn');
-  const seasonDetails = document.getElementById('seasonDetails');
-
+  /* --- LÓGICA DE TEMPORADAS --- */
   window.switchSeasonTab = function(seasonNum) {
+    const seasonTabs = document.querySelectorAll('.season-tab-btn');
+    const seasonDetails = document.getElementById('seasonDetails');
     if (!seasonDetails) return;
     const data = seasonsData[seasonNum];
     if (!data) return;
@@ -388,41 +396,46 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   };
 
-  if (seasonTabs.length > 0) {
+  function initSeasons() {
+    const seasonTabs = document.querySelectorAll('.season-tab-btn');
+    const seasonDetails = document.getElementById('seasonDetails');
+    if (!seasonDetails || seasonTabs.length === 0) return;
+
     seasonTabs.forEach(tab => {
-      tab.addEventListener('click', () => {
+      tab.onclick = () => {
         const seasonNum = tab.getAttribute('data-season');
         switchSeasonTab(seasonNum);
-      });
+      };
     });
 
-    // Detectar parámetro ?parte=X en la URL
     const urlParams = new URLSearchParams(window.location.search);
     const parteParam = urlParams.get('parte') || urlParams.get('season') || 1;
     switchSeasonTab(parteParam);
   }
 
   /* --- GENERADOR DE FRASES (LA RESISTENCIA) --- */
-  const quoteDisplay = document.getElementById('quoteDisplay');
-  const quoteAuthor = document.getElementById('quoteAuthor');
-  const newQuoteBtn = document.getElementById('newQuoteBtn');
+  function initQuotes() {
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    const quoteAuthor = document.getElementById('quoteAuthor');
+    const newQuoteBtn = document.getElementById('newQuoteBtn');
 
-  if (newQuoteBtn && quoteDisplay && quoteAuthor) {
-    let currentQuoteIndex = 0;
-    newQuoteBtn.addEventListener('click', () => {
-      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-      const q = quotes[currentQuoteIndex];
-      
-      quoteDisplay.style.opacity = '0';
-      quoteAuthor.style.opacity = '0';
+    if (newQuoteBtn && quoteDisplay && quoteAuthor) {
+      let currentQuoteIndex = 0;
+      newQuoteBtn.onclick = () => {
+        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+        const q = quotes[currentQuoteIndex];
+        
+        quoteDisplay.style.opacity = '0';
+        quoteAuthor.style.opacity = '0';
 
-      setTimeout(() => {
-        quoteDisplay.textContent = q.text;
-        quoteAuthor.textContent = q.author;
-        quoteDisplay.style.opacity = '1';
-        quoteAuthor.style.opacity = '1';
-      }, 200);
-    });
+        setTimeout(() => {
+          quoteDisplay.textContent = q.text;
+          quoteAuthor.textContent = q.author;
+          quoteDisplay.style.opacity = '1';
+          quoteAuthor.style.opacity = '1';
+        }, 200);
+      };
+    }
   }
 
   /* --- AUDIO AMBIENTAL BELLA CIAO (SINTETIZADOR WEB AUDIO API) --- */
@@ -496,24 +509,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (soundToggle) {
-    soundToggle.addEventListener('click', () => {
+    soundToggle.onclick = () => {
       if (isPlayingSound) {
         stopBellaCiaoMelody();
       } else {
         startBellaCiaoMelody();
       }
-    });
+    };
   }
 
-  /* --- BOTÓN FLOTANTE ESTILO BILLETE & MODAL DE CONTACTO PHP --- */
-  const openFeedbackBtn = document.getElementById('openFeedbackBtn');
-  const feedbackModal = document.getElementById('feedbackModal');
-  const feedbackModalClose = document.getElementById('feedbackModalClose');
-  const feedbackForm = document.getElementById('feedbackForm');
-  const feedbackStatus = document.getElementById('feedbackStatus');
-  const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
-
+  /* --- MODAL DE CONTACTO & BOTÓN FLOTANTE ESTILO BILLETE --- */
   function openFeedbackModal() {
+    const feedbackModal = document.getElementById('feedbackModal');
+    const feedbackStatus = document.getElementById('feedbackStatus');
     if (!feedbackModal) return;
     feedbackModal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -521,88 +529,650 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function closeFeedbackModal() {
+    const feedbackModal = document.getElementById('feedbackModal');
     if (!feedbackModal) return;
     feedbackModal.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  if (openFeedbackBtn) {
-    openFeedbackBtn.addEventListener('click', openFeedbackModal);
-  }
+  function initFeedbackModal() {
+    const openFeedbackBtn = document.getElementById('openFeedbackBtn');
+    const feedbackModal = document.getElementById('feedbackModal');
+    const feedbackModalClose = document.getElementById('feedbackModalClose');
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackStatus = document.getElementById('feedbackStatus');
+    const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
 
-  if (feedbackModalClose) {
-    feedbackModalClose.addEventListener('click', closeFeedbackModal);
-  }
+    if (openFeedbackBtn) openFeedbackBtn.onclick = openFeedbackModal;
+    if (feedbackModalClose) feedbackModalClose.onclick = closeFeedbackModal;
+    if (feedbackModal) {
+      feedbackModal.onclick = (e) => {
+        if (e.target === feedbackModal) closeFeedbackModal();
+      };
+    }
 
-  if (feedbackModal) {
-    feedbackModal.addEventListener('click', (e) => {
-      if (e.target === feedbackModal) closeFeedbackModal();
-    });
-  }
+    if (feedbackForm) {
+      feedbackForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(feedbackForm);
+        const originalBtnHtml = submitFeedbackBtn ? submitFeedbackBtn.innerHTML : '';
 
-  // Procesamiento del formulario de contacto / devoluciones hacia contacto.php
-  if (feedbackForm) {
-    feedbackForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+        if (submitFeedbackBtn) {
+          submitFeedbackBtn.disabled = true;
+          submitFeedbackBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Cifrando transmisión...';
+        }
 
-      const formData = new FormData(feedbackForm);
-      const originalBtnHtml = submitFeedbackBtn ? submitFeedbackBtn.innerHTML : '';
+        try {
+          const response = await fetch('contacto.php', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'Accept': 'application/json'
+            }
+          });
 
-      if (submitFeedbackBtn) {
-        submitFeedbackBtn.disabled = true;
-        submitFeedbackBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Cifrando transmisión...';
-      }
+          const result = await response.json();
 
-      try {
-        const response = await fetch('contacto.php', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Accept': 'application/json'
+          if (response.ok && result.status === 'success') {
+            if (feedbackStatus) {
+              feedbackStatus.className = 'feedback-status success';
+              feedbackStatus.innerHTML = `
+                <i class="fa-solid fa-circle-check"></i> <strong>${result.titulo || '¡Devolución Recibida!'}</strong><br>
+                ${result.mensaje || 'Tu mensaje fue entregado al Profesor.'}
+                <div style="font-size: 0.72rem; margin-top: 0.3rem; color: #a3e635;">Código: ${result.codigo || 'OK'}</div>
+              `;
+              feedbackStatus.style.display = 'block';
+            }
+            feedbackForm.reset();
+
+            setTimeout(() => {
+              closeFeedbackModal();
+              if (feedbackStatus) feedbackStatus.style.display = 'none';
+            }, 3500);
+          } else {
+            throw new Error(result.mensaje || 'Error en la transmisión de seguridad.');
           }
-        });
-
-        const result = await response.json();
-
-        if (response.ok && result.status === 'success') {
+        } catch (err) {
           if (feedbackStatus) {
-            feedbackStatus.className = 'feedback-status success';
+            feedbackStatus.className = 'feedback-status error';
             feedbackStatus.innerHTML = `
-              <i class="fa-solid fa-circle-check"></i> <strong>${result.titulo || '¡Devolución Recibida!'}</strong><br>
-              ${result.mensaje || 'Tu mensaje fue entregado al Profesor.'}
-              <div style="font-size: 0.72rem; margin-top: 0.3rem; color: #a3e635;">Código: ${result.codigo || 'OK'}</div>
+              <i class="fa-solid fa-triangle-exclamation"></i> <strong>Transmisión simulada / Aviso:</strong><br>
+              ${err.message.includes('Failed to fetch') || err.message.includes('NetworkError') 
+                ? 'Servidor PHP no activo en local. Si abriste el archivo directamente en el navegador, monta el proyecto en un servidor web local (Apache/XAMPP) para procesar contacto.php. ¡Datos validados!' 
+                : err.message}
             `;
             feedbackStatus.style.display = 'block';
           }
-          feedbackForm.reset();
-
-          setTimeout(() => {
-            closeFeedbackModal();
-            if (feedbackStatus) feedbackStatus.style.display = 'none';
-          }, 3500);
-        } else {
-          throw new Error(result.mensaje || 'Error en la transmisión de seguridad.');
+        } finally {
+          if (submitFeedbackBtn) {
+            submitFeedbackBtn.disabled = false;
+            submitFeedbackBtn.innerHTML = originalBtnHtml;
+          }
         }
-      } catch (err) {
-        // En caso de que se ejecute en entorno sin servidor PHP (ej. file://) o falle
-        if (feedbackStatus) {
-          feedbackStatus.className = 'feedback-status error';
-          feedbackStatus.innerHTML = `
-            <i class="fa-solid fa-triangle-exclamation"></i> <strong>Transmisión simulada / Aviso:</strong><br>
-            ${err.message.includes('Failed to fetch') || err.message.includes('NetworkError') 
-              ? 'Servidor PHP no activo en local. Si abriste el archivo directamente en el navegador, monta el proyecto en un servidor web local (Apache/XAMPP) para procesar contacto.php. ¡Datos validados!' 
-              : err.message}
-          `;
-          feedbackStatus.style.display = 'block';
-        }
-      } finally {
-        if (submitFeedbackBtn) {
-          submitFeedbackBtn.disabled = false;
-          submitFeedbackBtn.innerHTML = originalBtnHtml;
-        }
-      }
-    });
+      };
+    }
   }
 
+  /* --- INICIALIZADOR GENERAL DE PÁGINAS Y CONTENIDO --- */
+  function initPageFeatures() {
+    initCharacters();
+    initSeasons();
+    initQuotes();
+    initFeedbackModal();
+  }
+
+  /* ==========================================================================
+     ANIMACIÓN DE BÓVEDA BANCARIA (TRANSICIONES ENTRE MENÚS)
+     Fiel a la cámara acorazada con bisagra monolítica izquierda, rueda de 8 radios,
+     cerrojos hidráulicos, apertura 3D y desplazamiento hacia los márgenes.
+     ========================================================================== */
+
+  function createVaultChamberDOM() {
+    if (document.getElementById('vaultTransitionOverlay')) return;
+
+    // Generar 36 remaches perimetrales exactos alrededor de la puerta circular (cx=480, cy=375, r=266)
+    let rimRivets = '';
+    for (let i = 0; i < 36; i++) {
+      const angle = (i * 2 * Math.PI) / 36;
+      const rx = (480 + 266 * Math.cos(angle)).toFixed(1);
+      const ry = (375 + 266 * Math.sin(angle)).toFixed(1);
+      rimRivets += `<circle cx="${rx}" cy="${ry}" r="3.5" fill="url(#vRivet)"/>`;
+    }
+
+    const overlay = document.createElement('div');
+    overlay.id = 'vaultTransitionOverlay';
+    overlay.className = 'vault-transition-overlay';
+    overlay.setAttribute('aria-hidden', 'true');
+
+    overlay.innerHTML = `
+      <!-- Techo Iluminado con Paneles de Luz -->
+      <div class="vault-ceiling">
+        <div class="vault-ceiling-grid">
+          <div class="ceiling-panel"></div>
+          <div class="ceiling-panel"></div>
+          <div class="ceiling-panel"></div>
+          <div class="ceiling-panel"></div>
+          <div class="ceiling-panel"></div>
+          <div class="ceiling-panel"></div>
+        </div>
+      </div>
+
+      <!-- Suelo Pulido de Hormigón / Granito con Reflejo -->
+      <div class="vault-floor">
+        <div class="floor-joints">
+          <div class="floor-joint-line"></div>
+          <div class="floor-joint-line"></div>
+          <div class="floor-joint-line"></div>
+          <div class="floor-joint-line"></div>
+        </div>
+      </div>
+
+      <!-- Pared Izquierda de Acero Cepillado -->
+      <div class="vault-wall-left">
+        <div class="steel-seam-h" style="top: 25%;"></div>
+        <div class="steel-seam-h" style="top: 75%;"></div>
+        <div class="steel-seam-v" style="right: 32%;"></div>
+        <div class="rivets-row" style="top: 15px; left: 35px;">
+          <div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div>
+        </div>
+        <div class="rivets-col" style="top: 28%; left: 35px;">
+          <div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div>
+        </div>
+        <div class="rivets-row" style="bottom: 25px; left: 35px;">
+          <div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div>
+        </div>
+      </div>
+
+      <!-- Pared Derecha de Acero Cepillado -->
+      <div class="vault-wall-right">
+        <div class="steel-seam-h" style="top: 25%;"></div>
+        <div class="steel-seam-h" style="top: 75%;"></div>
+        <div class="steel-seam-v" style="left: 32%;"></div>
+        <div class="rivets-row" style="top: 15px; right: 35px;">
+          <div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div>
+        </div>
+        <div class="rivets-col" style="top: 28%; right: 35px;">
+          <div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div>
+        </div>
+        <div class="rivets-row" style="bottom: 25px; right: 35px;">
+          <div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div><div class="rivet-dot"></div>
+        </div>
+      </div>
+
+      <!-- Escenario 3D Central con la Puerta Acorazada -->
+      <div class="vault-stage-3d">
+        <div class="vault-portal-interior"></div>
+
+        <div class="vault-door-assembly">
+          <svg class="vault-svg" viewBox="0 0 850 750" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Gradientes Metálicos -->
+              <linearGradient id="vSteelH" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#464e57"/>
+                <stop offset="18%" stop-color="#7e8994"/>
+                <stop offset="38%" stop-color="#555e67"/>
+                <stop offset="62%" stop-color="#9ea9b4"/>
+                <stop offset="85%" stop-color="#606973"/>
+                <stop offset="100%" stop-color="#383e45"/>
+              </linearGradient>
+
+              <linearGradient id="vSteelV" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#383e45"/>
+                <stop offset="22%" stop-color="#7b8691"/>
+                <stop offset="48%" stop-color="#4c545c"/>
+                <stop offset="74%" stop-color="#95a1ac"/>
+                <stop offset="100%" stop-color="#282c31"/>
+              </linearGradient>
+
+              <radialGradient id="vDoorFace" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#9aa4ae"/>
+                <stop offset="42%" stop-color="#646d76"/>
+                <stop offset="68%" stop-color="#9da8b3"/>
+                <stop offset="86%" stop-color="#464e56"/>
+                <stop offset="96%" stop-color="#b8c2cb"/>
+                <stop offset="100%" stop-color="#2f343a"/>
+              </radialGradient>
+
+              <linearGradient id="vChrome" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="25%" stop-color="#9da6ae"/>
+                <stop offset="50%" stop-color="#e8ecf0"/>
+                <stop offset="75%" stop-color="#565e66"/>
+                <stop offset="100%" stop-color="#d4dbe0"/>
+              </linearGradient>
+
+              <radialGradient id="vRivet" cx="35%" cy="35%" r="65%">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#8a949e"/>
+                <stop offset="85%" stop-color="#32373c"/>
+                <stop offset="100%" stop-color="#15171a"/>
+              </radialGradient>
+
+              <filter id="vDropShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.6"/>
+              </filter>
+              
+              <filter id="vHeavyShadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="6" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.8"/>
+              </filter>
+            </defs>
+
+            <!-- Placas de anclaje de la bisagra a la pared izquierda (estacionarias) -->
+            <g id="vaultHingeWallPlates">
+              <!-- Brida Superior -->
+              <rect x="130" y="140" width="70" height="90" rx="4" fill="url(#vSteelV)" stroke="#1a1c1e" stroke-width="2" filter="url(#vDropShadow)"/>
+              <circle cx="150" cy="155" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="180" cy="155" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="150" cy="185" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="180" cy="185" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="150" cy="215" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="180" cy="215" r="4.5" fill="url(#vRivet)"/>
+
+              <!-- Brida Inferior -->
+              <rect x="130" y="520" width="70" height="90" rx="4" fill="url(#vSteelV)" stroke="#1a1c1e" stroke-width="2" filter="url(#vDropShadow)"/>
+              <circle cx="150" cy="535" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="180" cy="535" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="150" cy="565" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="180" cy="565" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="150" cy="595" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="180" cy="595" r="4.5" fill="url(#vRivet)"/>
+            </g>
+
+            <!-- PUERTA GIRATORIA COMPLETA (Bisagra en x=200, y=375) -->
+            <g id="vaultDoorSwingingAssembly" class="vault-door-swing">
+              
+              <!-- Nudillo Cilíndrico Superior de la Bisagra Izquierda -->
+              <rect x="180" y="130" width="40" height="110" rx="10" fill="url(#vSteelH)" stroke="#181a1c" stroke-width="2" filter="url(#vDropShadow)"/>
+              <ellipse cx="200" cy="130" rx="20" ry="8" fill="url(#vChrome)"/>
+              <ellipse cx="200" cy="240" rx="20" ry="8" fill="#25292d"/>
+
+              <!-- Nudillo Cilíndrico Inferior de la Bisagra Izquierda -->
+              <rect x="180" y="510" width="40" height="110" rx="10" fill="url(#vSteelH)" stroke="#181a1c" stroke-width="2" filter="url(#vDropShadow)"/>
+              <ellipse cx="200" cy="510" rx="20" ry="8" fill="url(#vChrome)"/>
+              <ellipse cx="200" cy="620" rx="20" ry="8" fill="#25292d"/>
+
+              <!-- Brazo curvo macizo de la bisagra que abraza la puerta -->
+              <path d="M 200 170 
+                       L 300 170 
+                       A 20 20 0 0 1 320 190 
+                       L 320 280 
+                       A 20 20 0 0 0 340 300 
+                       L 410 300 
+                       L 410 450 
+                       L 340 450 
+                       A 20 20 0 0 0 320 470 
+                       L 320 560 
+                       A 20 20 0 0 1 300 580 
+                       L 200 580 
+                       L 200 540 
+                       L 280 540 
+                       L 280 490 
+                       A 15 15 0 0 0 265 475 
+                       L 230 475 
+                       A 30 30 0 0 1 200 445 
+                       L 200 305 
+                       A 30 30 0 0 1 230 275 
+                       L 265 275 
+                       A 15 15 0 0 0 280 260 
+                       L 280 210 
+                       L 200 210 Z" 
+                    fill="url(#vSteelV)" stroke="#181a1c" stroke-width="3" filter="url(#vHeavyShadow)"/>
+
+              <!-- Pernos del brazo de bisagra -->
+              <circle cx="235" cy="185" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="265" cy="185" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="235" cy="565" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="265" cy="565" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="300" cy="245" r="4.5" fill="url(#vRivet)"/>
+              <circle cx="300" cy="505" r="4.5" fill="url(#vRivet)"/>
+
+              <!-- Puerta Circular de Acero (Centro cx=480, cy=375, r=270) -->
+              <circle cx="480" cy="375" r="280" fill="url(#vSteelH)" stroke="#181a1c" stroke-width="4" filter="url(#vHeavyShadow)"/>
+              <circle cx="480" cy="375" r="270" fill="none" stroke="#22272c" stroke-width="6"/>
+              <circle cx="480" cy="375" r="262" fill="url(#vDoorFace)" stroke="#111" stroke-width="2"/>
+
+              <!-- 36 Remaches Perimetrales -->
+              ${rimRivets}
+
+              <!-- Anillos Interiores Concéntricos -->
+              <circle cx="480" cy="375" r="240" fill="none" stroke="#32383f" stroke-width="4"/>
+              <circle cx="480" cy="375" r="236" fill="none" stroke="#87929e" stroke-width="1.5"/>
+
+              <!-- Soportes / Lugs en el Marco -->
+              <!-- Soporte Superior (12 o'clock) -->
+              <rect x="455" y="98" width="50" height="30" rx="3" fill="url(#vSteelV)" stroke="#181a1c" stroke-width="2"/>
+              <circle cx="465" cy="113" r="3" fill="url(#vRivet)"/>
+              <circle cx="495" cy="113" r="3" fill="url(#vRivet)"/>
+
+              <!-- Soporte Inferior (6 o'clock) -->
+              <rect x="455" y="622" width="50" height="30" rx="3" fill="url(#vSteelV)" stroke="#181a1c" stroke-width="2"/>
+              <circle cx="465" cy="637" r="3" fill="url(#vRivet)"/>
+              <circle cx="495" cy="637" r="3" fill="url(#vRivet)"/>
+
+              <!-- Soporte Diagonal Superior Derecho (2 o'clock) -->
+              <g transform="translate(660, 195) rotate(45)">
+                <rect x="-24" y="-14" width="48" height="28" rx="3" fill="url(#vSteelV)" stroke="#181a1c" stroke-width="2"/>
+                <circle cx="-12" cy="0" r="3" fill="url(#vRivet)"/>
+                <circle cx="12" cy="0" r="3" fill="url(#vRivet)"/>
+              </g>
+
+              <!-- Soporte Diagonal Inferior Derecho (4 o'clock) -->
+              <g transform="translate(660, 555) rotate(-45)">
+                <rect x="-24" y="-14" width="48" height="28" rx="3" fill="url(#vSteelV)" stroke="#181a1c" stroke-width="2"/>
+                <circle cx="-12" cy="0" r="3" fill="url(#vRivet)"/>
+                <circle cx="12" cy="0" r="3" fill="url(#vRivet)"/>
+              </g>
+
+              <!-- Soporte Látigo Izquierdo (9 o'clock) -->
+              <rect x="235" y="360" width="40" height="30" rx="3" fill="url(#vSteelV)" stroke="#181a1c" stroke-width="2"/>
+
+              <!-- MECANISMOS HIDRÁULICOS Y PISTONES RETRÁCTILES -->
+              <!-- Cilindro Hidráulico Superior Vertical -->
+              <rect x="458" y="165" width="44" height="85" rx="5" fill="url(#vSteelH)" stroke="#1c2024" stroke-width="2" filter="url(#vDropShadow)"/>
+              <rect x="452" y="195" width="56" height="35" rx="2" fill="url(#vSteelV)" stroke="#111" stroke-width="1.5"/>
+              <circle cx="458" cy="205" r="2.5" fill="url(#vRivet)"/>
+              <circle cx="502" cy="205" r="2.5" fill="url(#vRivet)"/>
+              <circle cx="458" cy="220" r="2.5" fill="url(#vRivet)"/>
+              <circle cx="502" cy="220" r="2.5" fill="url(#vRivet)"/>
+              <rect id="vTopPiston" class="vault-piston-top" x="471" y="118" width="18" height="60" rx="2" fill="url(#vChrome)" stroke="#333" stroke-width="1"/>
+
+              <!-- Cilindro Hidráulico Inferior Vertical -->
+              <rect x="458" y="500" width="44" height="85" rx="5" fill="url(#vSteelH)" stroke="#1c2024" stroke-width="2" filter="url(#vDropShadow)"/>
+              <rect x="452" y="520" width="56" height="35" rx="2" fill="url(#vSteelV)" stroke="#111" stroke-width="1.5"/>
+              <circle cx="458" cy="530" r="2.5" fill="url(#vRivet)"/>
+              <circle cx="502" cy="530" r="2.5" fill="url(#vRivet)"/>
+              <circle cx="458" cy="545" r="2.5" fill="url(#vRivet)"/>
+              <circle cx="502" cy="545" r="2.5" fill="url(#vRivet)"/>
+              <rect id="vBottomPiston" class="vault-piston-bottom" x="471" y="572" width="18" height="60" rx="2" fill="url(#vChrome)" stroke="#333" stroke-width="1"/>
+
+              <!-- Barra Horizontal hacia la bisagra izquierda -->
+              <rect x="255" y="370" width="165" height="10" rx="2" fill="url(#vChrome)" stroke="#333" stroke-width="1"/>
+
+              <!-- Cerrojo Diagonal Superior Derecho -->
+              <g class="vault-bolt-diag-top">
+                <line x1="535" y1="320" x2="665" y2="190" stroke="url(#vChrome)" stroke-width="10" stroke-linecap="round"/>
+              </g>
+
+              <!-- Cerrojo Diagonal Inferior Derecho -->
+              <g class="vault-bolt-diag-bottom">
+                <line x1="535" y1="430" x2="665" y2="560" stroke="url(#vChrome)" stroke-width="10" stroke-linecap="round"/>
+              </g>
+
+              <!-- DIAL DE COMBINACIÓN LATERAL DERECHO (cx=625, cy=375) -->
+              <g id="vaultCombinationDial">
+                <circle cx="625" cy="375" r="44" fill="url(#vSteelH)" stroke="#181a1c" stroke-width="3" filter="url(#vDropShadow)"/>
+                <circle cx="625" cy="375" r="36" fill="#16181b" stroke="#555e67" stroke-width="2"/>
+                <circle cx="625" cy="375" r="32" fill="none" stroke="#ced5dc" stroke-width="2" stroke-dasharray="2 6"/>
+                <!-- Pomo del Dial con 3 palancas -->
+                <g id="vaultDialKnob" class="vault-dial-knob" style="transform-origin: 625px 375px;">
+                  <circle cx="625" cy="375" r="16" fill="url(#vChrome)" stroke="#111" stroke-width="1.5"/>
+                  <rect x="622" y="340" width="6" height="22" rx="3" fill="url(#vChrome)"/>
+                  <circle cx="625" cy="338" r="4" fill="url(#vSteelH)"/>
+                  <g transform="rotate(120, 625, 375)">
+                    <rect x="622" y="340" width="6" height="22" rx="3" fill="url(#vChrome)"/>
+                    <circle cx="625" cy="338" r="4" fill="url(#vSteelH)"/>
+                  </g>
+                  <g transform="rotate(240, 625, 375)">
+                    <rect x="622" y="340" width="6" height="22" rx="3" fill="url(#vChrome)"/>
+                    <circle cx="625" cy="338" r="4" fill="url(#vSteelH)"/>
+                  </g>
+                  <circle cx="625" cy="375" r="6" fill="#22272c"/>
+                </g>
+              </g>
+
+              <!-- ASIDERO CURVO TUBULAR DE ACERO A LA DERECHA -->
+              <g id="vaultGrabHandle">
+                <circle cx="685" cy="305" r="12" fill="url(#vSteelV)" stroke="#111" stroke-width="1.5"/>
+                <circle cx="682" cy="300" r="2.5" fill="url(#vRivet)"/>
+                <circle cx="688" cy="310" r="2.5" fill="url(#vRivet)"/>
+                <circle cx="685" cy="445" r="12" fill="url(#vSteelV)" stroke="#111" stroke-width="1.5"/>
+                <circle cx="682" cy="440" r="2.5" fill="url(#vRivet)"/>
+                <circle cx="688" cy="450" r="2.5" fill="url(#vRivet)"/>
+                <path d="M 685 305 C 725 335, 725 415, 685 445" fill="none" stroke="url(#vChrome)" stroke-width="12" stroke-linecap="round" filter="url(#vDropShadow)"/>
+              </g>
+
+              <!-- RUEDA CENTRAL DE SEGURIDAD CON 8 RADIOS Y MANIJAS (Centro cx=480, cy=375) -->
+              <circle cx="480" cy="375" r="105" fill="none" stroke="#22272c" stroke-width="10"/>
+              <circle cx="480" cy="375" r="100" fill="none" stroke="#87929e" stroke-width="2"/>
+
+              <!-- Rueda giratoria completa de 8 radios -->
+              <g id="vaultCenterWheel" class="vault-wheel-center" style="transform-origin: 480px 375px;">
+                <circle cx="480" cy="375" r="82" fill="none" stroke="url(#vChrome)" stroke-width="12" filter="url(#vDropShadow)"/>
+                <circle cx="480" cy="375" r="74" fill="none" stroke="#25292d" stroke-width="2"/>
+
+                <!-- 8 Radios con Manijas Cilíndricas (a 0°, 45°, 90°, 135°, 180°, 225°, 270°, 315°) -->
+                ${[0, 45, 90, 135, 180, 225, 270, 315].map(deg => `
+                  <g transform="rotate(${deg}, 480, 375)">
+                    <rect x="475" y="275" width="10" height="70" rx="3" fill="url(#vChrome)" stroke="#333" stroke-width="1"/>
+                    <rect x="473" y="245" width="14" height="34" rx="6" fill="url(#vSteelH)" stroke="#111" stroke-width="1.5" filter="url(#vDropShadow)"/>
+                    <circle cx="480" cy="246" r="5" fill="url(#vChrome)"/>
+                  </g>
+                `).join('')}
+
+                <!-- Casquillo Central Biselado -->
+                <circle cx="480" cy="375" r="38" fill="url(#vSteelV)" stroke="#181a1c" stroke-width="3" filter="url(#vDropShadow)"/>
+                <circle cx="480" cy="375" r="28" fill="url(#vChrome)" stroke="#333" stroke-width="1.5"/>
+                <circle cx="480" cy="375" r="16" fill="url(#vSteelH)" stroke="#111" stroke-width="1"/>
+              </g>
+
+            </g>
+          </svg>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+  }
+
+  /* --- SINTETIZADOR DE EFECTOS DE SONIDO PARA LA BÓVEDA --- */
+  function playVaultSound(type) {
+    try {
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtxClass) return;
+      const ctx = new AudioCtxClass();
+
+      if (type === 'unlock') {
+        const now = ctx.currentTime;
+        for (let i = 0; i < 6; i++) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(750 + i * 90, now + i * 0.08);
+          gain.gain.setValueAtTime(0.06, now + i * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + i * 0.08);
+          osc.stop(now + i * 0.08 + 0.05);
+        }
+        setTimeout(() => {
+          const thud = ctx.createOscillator();
+          const thudGain = ctx.createGain();
+          thud.type = 'sine';
+          thud.frequency.setValueAtTime(130, ctx.currentTime);
+          thud.frequency.exponentialRampToValueAtTime(35, ctx.currentTime + 0.25);
+          thudGain.gain.setValueAtTime(0.25, ctx.currentTime);
+          thudGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+          thud.connect(thudGain);
+          thudGain.connect(ctx.destination);
+          thud.start();
+          thud.stop(ctx.currentTime + 0.35);
+        }, 500);
+      } else if (type === 'swing') {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(60, ctx.currentTime);
+        osc.frequency.linearRampToValueAtTime(40, ctx.currentTime + 0.65);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.7);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.75);
+      }
+    } catch (e) {
+      // Audio silencioso en entornos restringidos
+    }
+  }
+
+  /* --- TRANSICIÓN CINEMÁTICA Y NAVEGACIÓN FLUIDA --- */
+  let isVaultTransitioning = false;
+
+  function navigateWithVault(targetHref) {
+    if (isVaultTransitioning) return;
+
+    const targetUrl = new URL(targetHref, window.location.href);
+    const currentUrl = new URL(window.location.href);
+
+    if (targetUrl.origin !== currentUrl.origin) {
+      window.location.href = targetHref;
+      return;
+    }
+
+    if (targetUrl.pathname === currentUrl.pathname && targetUrl.search === currentUrl.search) {
+      if (targetUrl.hash) {
+        const el = document.querySelector(targetUrl.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    isVaultTransitioning = true;
+    createVaultChamberDOM();
+    const overlay = document.getElementById('vaultTransitionOverlay');
+    if (!overlay) {
+      window.location.href = targetHref;
+      return;
+    }
+
+    overlay.className = 'vault-transition-overlay is-active';
+    playVaultSound('unlock');
+
+    const fetchPromise = fetch(targetHref)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      });
+
+    // Paso 1: Giro de rueda, dial y cerrojos retráctiles (0.05s)
+    setTimeout(() => {
+      overlay.classList.add('is-unlocking');
+    }, 50);
+
+    // Paso 2: Giro de la puerta acorazada en 3D sobre la bisagra izquierda (0.65s)
+    setTimeout(() => {
+      playVaultSound('swing');
+      overlay.classList.add('is-opening');
+    }, 650);
+
+    // Paso 3: Sustitución fluida del contenido mientras la puerta está abierta (0.95s)
+    setTimeout(async () => {
+      try {
+        const htmlText = await fetchPromise;
+        const parser = new DOMParser();
+        const newDoc = parser.parseFromString(htmlText, 'text/html');
+
+        const newMain = newDoc.querySelector('main');
+        const currentMain = document.querySelector('main');
+        if (newMain && currentMain) {
+          currentMain.innerHTML = newMain.innerHTML;
+          currentMain.className = newMain.className;
+        }
+
+        if (newDoc.title) {
+          document.title = newDoc.title;
+        }
+
+        const newCharModal = newDoc.getElementById('characterModal');
+        const curCharModal = document.getElementById('characterModal');
+        if (newCharModal) {
+          if (curCharModal) {
+            curCharModal.innerHTML = newCharModal.innerHTML;
+          } else {
+            document.body.appendChild(newCharModal);
+          }
+        }
+
+        const targetFilename = targetUrl.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+          const h = link.getAttribute('href');
+          if (h && (h === targetFilename || (targetFilename === '' && h === 'index.html') || h.split('?')[0] === targetFilename)) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        window.history.pushState({ path: targetHref }, newDoc.title, targetHref);
+        window.scrollTo(0, 0);
+
+        initPageFeatures();
+
+      } catch (err) {
+        console.warn('Navegación estándar por respaldo:', err);
+        window.location.href = targetHref;
+        return;
+      }
+    }, 950);
+
+    // Paso 4: Las paredes de acero y la puerta se abren hacia los márgenes (1.25s)
+    setTimeout(() => {
+      overlay.classList.add('is-parting');
+    }, 1250);
+
+    // Paso 5: Desvanecimiento final suave (1.95s)
+    setTimeout(() => {
+      overlay.classList.add('is-cleared');
+    }, 1950);
+
+    // Paso 6: Conclusión y reinicio para futuras navegaciones (2.15s)
+    setTimeout(() => {
+      overlay.className = 'vault-transition-overlay';
+      isVaultTransitioning = false;
+    }, 2150);
+  }
+
+  // Interceptar clicks de navegación en el menú y footer mediante delegación
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    if (link.target === '_blank' || link.hasAttribute('download')) return;
+    if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    if (href.startsWith('http://') || href.startsWith('https://')) {
+      const url = new URL(href);
+      if (url.origin !== window.location.origin) return;
+    }
+
+    if (link.classList.contains('nav-link') || 
+        link.classList.contains('dropdown-link') || 
+        link.closest('.footer-menu') || 
+        href.endsWith('.html') || 
+        href.includes('.html?')) {
+      e.preventDefault();
+      const navList = document.getElementById('navList');
+      if (navList) navList.classList.remove('mobile-active');
+      navigateWithVault(href);
+    }
+  });
+
+  // Gestión de botones Atrás/Adelante del navegador
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.path) {
+      navigateWithVault(e.state.path);
+    } else {
+      window.location.reload();
+    }
+  });
+
+  // Inicialización de la Bóveda y componentes en la carga de página
+  createVaultChamberDOM();
+  initPageFeatures();
+
 });
+
