@@ -217,6 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const filtered = characters.filter(c => filter === 'all' || c.category === filter);
 
+    if (filter === 'ley' || filter === 'rehenes' || filtered.length <= 2) {
+      characterGrid.classList.add('is-centered');
+    } else {
+      characterGrid.classList.remove('is-centered');
+    }
+
     filtered.forEach(char => {
       const card = document.createElement('div');
       card.className = 'character-card';
@@ -331,12 +337,24 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!carouselViewport || !prevBtn || !nextBtn) return;
       const scrollLeft = carouselViewport.scrollLeft;
       const maxScroll = carouselViewport.scrollWidth - carouselViewport.clientWidth;
+      const canScroll = maxScroll > 15;
+      const carouselHint = document.querySelector('.carousel-hint');
 
-      prevBtn.style.opacity = scrollLeft <= 8 ? '0.35' : '1';
-      prevBtn.style.pointerEvents = scrollLeft <= 8 ? 'none' : 'all';
+      if (!canScroll) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        if (carouselHint) carouselHint.style.display = 'none';
+      } else {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+        if (carouselHint) carouselHint.style.display = 'flex';
 
-      nextBtn.style.opacity = scrollLeft >= maxScroll - 8 ? '0.35' : '1';
-      nextBtn.style.pointerEvents = scrollLeft >= maxScroll - 8 ? 'none' : 'all';
+        prevBtn.style.opacity = scrollLeft <= 8 ? '0.35' : '1';
+        prevBtn.style.pointerEvents = scrollLeft <= 8 ? 'none' : 'all';
+
+        nextBtn.style.opacity = scrollLeft >= maxScroll - 8 ? '0.35' : '1';
+        nextBtn.style.pointerEvents = scrollLeft >= maxScroll - 8 ? 'none' : 'all';
+      }
     }
 
     if (carouselViewport && prevBtn && nextBtn) {
@@ -363,16 +381,17 @@ document.addEventListener('DOMContentLoaded', () => {
           const filterValue = btn.getAttribute('data-filter');
           renderCharacters(filterValue);
           if (carouselViewport) {
-            carouselViewport.scrollTo({ left: 0, behavior: 'smooth' });
+            carouselViewport.scrollLeft = 0;
           }
-          setTimeout(updateCarouselArrows, 120);
+          setTimeout(updateCarouselArrows, 60);
         };
       });
     }
 
     if (characterGrid) {
       renderCharacters('all');
-      setTimeout(updateCarouselArrows, 150);
+      setTimeout(updateCarouselArrows, 100);
+      window.addEventListener('resize', updateCarouselArrows);
     }
   }
 

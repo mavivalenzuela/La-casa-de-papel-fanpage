@@ -657,6 +657,14 @@ main {
   min-width: max-content;
 }
 
+/* Centrado cuando se filtran categorías con pocos personajes (Policía y Ley, Rehenes clave) */
+.character-grid.is-centered {
+  justify-content: center;
+  justify-content: safe center;
+  min-width: 100%;
+  width: 100%;
+}
+
 /* Tarjeta de Personaje Solapada */
 .character-card {
   display: flex;
