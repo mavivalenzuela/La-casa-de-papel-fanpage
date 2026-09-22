@@ -438,82 +438,225 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* --- AUDIO AMBIENTAL BELLA CIAO (SINTETIZADOR WEB AUDIO API) --- */
+  /* --- AUDIO / BANDA SONORA: INTRO LA CASA DE PAPEL (YOUTUBE: HjCQnYC22-8 / PIANO TUTORIAL) --- */
   const soundToggle = document.getElementById('soundToggle');
   const soundIcon = document.getElementById('soundIcon');
   let audioCtx = null;
   let isPlayingSound = false;
   let melodyInterval = null;
+  let ytPlayer = null;
+  let isYtReady = false;
 
-  const melodyNotes = [
-    { note: 440, duration: 250 },
-    { note: 523.25, duration: 250 },
-    { note: 587.33, duration: 250 },
-    { note: 659.25, duration: 500 },
-    { note: 440, duration: 250 },
-    { note: 523.25, duration: 250 },
-    { note: 587.33, duration: 250 },
-    { note: 659.25, duration: 500 },
-    { note: 440, duration: 250 },
-    { note: 523.25, duration: 250 },
-    { note: 587.33, duration: 250 },
-    { note: 659.25, duration: 350 },
-    { note: 587.33, duration: 250 },
-    { note: 523.25, duration: 250 },
-    { note: 659.25, duration: 500 },
+  // Contenedor para el reproductor de YouTube
+  let ytContainer = document.getElementById('ytPlayerContainer');
+  if (!ytContainer) {
+    ytContainer = document.createElement('div');
+    ytContainer.id = 'ytPlayerContainer';
+    ytContainer.style.cssText = 'position: fixed; right: -9999px; bottom: 0; width: 200px; height: 200px; opacity: 0.01; pointer-events: none; z-index: -999;';
+    document.body.appendChild(ytContainer);
+  }
+
+  // Inicializar YouTube IFrame Player
+  function setupYouTubePlayer() {
+    if (window.YT && window.YT.Player) {
+      try {
+        ytPlayer = new window.YT.Player('ytPlayerContainer', {
+          height: '200',
+          width: '200',
+          videoId: 'HjCQnYC22-8',
+          playerVars: {
+            autoplay: 0,
+            controls: 0,
+            loop: 1,
+            playlist: 'HjCQnYC22-8',
+            playsinline: 1
+          },
+          events: {
+            onReady: () => {
+              isYtReady = true;
+            },
+            onStateChange: (event) => {
+              if (window.YT && event.data === window.YT.PlayerState.PLAYING) {
+                isPlayingSound = true;
+                stopIntroPianoMelody();
+                updateSoundButtonUI(true);
+              } else if (window.YT && (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED)) {
+                isPlayingSound = false;
+                updateSoundButtonUI(false);
+              }
+            },
+            onError: (err) => {
+              console.warn('YouTube Player error, activando sintetizador piano:', err);
+              if (isPlayingSound) startIntroPianoMelody();
+            }
+          }
+        });
+      } catch (e) {
+        console.warn('Error inicializando YT player:', e);
+      }
+    }
+  }
+
+  const prevOnYouTube = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function() {
+    if (prevOnYouTube) prevOnYouTube();
+    setupYouTubePlayer();
+  };
+
+  if (!window.YT) {
+    const ytScript = document.createElement('script');
+    ytScript.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(ytScript);
+  } else {
+    setupYouTubePlayer();
+  }
+
+  // Melodía Piano Intro de La Casa de Papel (My Life Is Going On) como respaldo
+  const introPianoNotes = [
+    { note: 440, duration: 380 },    // A4
+    { note: 493.88, duration: 380 }, // B4
+    { note: 587.33, duration: 480 }, // D5
+    { note: 554.37, duration: 380 }, // C#5
+    { note: 493.88, duration: 480 }, // B4
+    { note: 440, duration: 380 },    // A4
+    { note: 369.99, duration: 750 }, // F#4
+
+    // Verso: "If I stay with you, if I'm choosing wrong..."
+    { note: 293.66, duration: 320 }, // D4
+    { note: 329.63, duration: 320 }, // E4
+    { note: 369.99, duration: 380 }, // F#4
+    { note: 369.99, duration: 380 }, // F#4
+    { note: 369.99, duration: 480 }, // F#4
+    { note: 329.63, duration: 320 }, // E4
+    { note: 293.66, duration: 320 }, // D4
+    { note: 329.63, duration: 320 }, // E4
+    { note: 369.99, duration: 650 }, // F#4
+
+    // "I don't care at all..."
+    { note: 369.99, duration: 380 }, // F#4
+    { note: 329.63, duration: 380 }, // E4
+    { note: 293.66, duration: 750 }, // D4
+
+    // "If I'm losing now, but I'm winning late..."
+    { note: 293.66, duration: 320 }, // D4
+    { note: 329.63, duration: 320 }, // E4
+    { note: 369.99, duration: 380 }, // F#4
+    { note: 369.99, duration: 380 }, // F#4
+    { note: 369.99, duration: 480 }, // F#4
+    { note: 329.63, duration: 320 }, // E4
+    { note: 293.66, duration: 320 }, // D4
+    { note: 329.63, duration: 320 }, // E4
+    { note: 369.99, duration: 650 }, // F#4
+
+    // "That's all I want..."
+    { note: 440, duration: 420 },    // A4
+    { note: 369.99, duration: 420 }, // F#4
+    { note: 293.66, duration: 850 }  // D4
   ];
 
-  function playBellaCiaoNote(freq, duration) {
+  function playPianoNote(freq, duration) {
     if (!audioCtx) return;
     try {
-      const osc = audioCtx.createOscillator();
+      const now = audioCtx.currentTime;
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (duration / 1000));
-      osc.connect(gain);
+
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(freq, now);
+
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(freq * 2, now);
+
+      gain.gain.setValueAtTime(0.09, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + (duration / 1000));
+
+      osc1.connect(gain);
+      osc2.connect(gain);
       gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + (duration / 1000));
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + (duration / 1000));
+      osc2.stop(now + (duration / 1000));
     } catch (e) {
       console.log('Audio error:', e);
     }
   }
 
-  function startBellaCiaoMelody() {
+  function startIntroPianoMelody() {
     let index = 0;
-    isPlayingSound = true;
-    if (soundToggle) soundToggle.style.background = 'var(--color-primary-red)';
-    if (soundIcon) soundIcon.className = 'fa-solid fa-volume-xmark';
-
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
-
+    clearInterval(melodyInterval);
     melodyInterval = setInterval(() => {
-      const current = melodyNotes[index];
-      playBellaCiaoNote(current.note, current.duration);
-      index = (index + 1) % melodyNotes.length;
-    }, 380);
+      const current = introPianoNotes[index];
+      playPianoNote(current.note, current.duration);
+      index = (index + 1) % introPianoNotes.length;
+    }, 450);
   }
 
-  function stopBellaCiaoMelody() {
-    isPlayingSound = false;
+  function stopIntroPianoMelody() {
     clearInterval(melodyInterval);
-    if (soundToggle) soundToggle.style.background = 'rgba(229, 9, 20, 0.12)';
-    if (soundIcon) soundIcon.className = 'fa-solid fa-volume-high';
+  }
+
+  function updateSoundButtonUI(playing) {
+    const btn = document.getElementById('soundToggle');
+    const icon = document.getElementById('soundIcon');
+    const label = btn ? btn.querySelector('span') : null;
+
+    if (playing) {
+      if (btn) {
+        btn.style.background = 'var(--color-primary-red)';
+        btn.title = 'Pausar Banda Sonora (Intro LCDP)';
+      }
+      if (icon) icon.className = 'fa-solid fa-volume-xmark';
+      if (label) label.textContent = 'Intro LCDP';
+    } else {
+      if (btn) {
+        btn.style.background = 'rgba(229, 9, 20, 0.12)';
+        btn.title = 'Reproducir Intro (La Casa de Papel)';
+      }
+      if (icon) icon.className = 'fa-solid fa-music';
+      if (label) label.textContent = 'Intro LCDP';
+    }
   }
 
   if (soundToggle) {
     soundToggle.onclick = () => {
       if (isPlayingSound) {
-        stopBellaCiaoMelody();
+        isPlayingSound = false;
+        if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+          try { ytPlayer.pauseVideo(); } catch (e) {}
+        }
+        stopIntroPianoMelody();
+        updateSoundButtonUI(false);
       } else {
-        startBellaCiaoMelody();
+        isPlayingSound = true;
+        updateSoundButtonUI(true);
+
+        let startedYt = false;
+        if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+          try {
+            ytPlayer.playVideo();
+            startedYt = true;
+          } catch (e) {
+            console.warn('No se pudo iniciar YouTube directamente:', e);
+          }
+        }
+
+        setTimeout(() => {
+          if (isPlayingSound) {
+            const playerState = (ytPlayer && typeof ytPlayer.getPlayerState === 'function') ? ytPlayer.getPlayerState() : -1;
+            if (playerState !== 1) {
+              startIntroPianoMelody();
+            }
+          }
+        }, 1200);
       }
     };
   }
