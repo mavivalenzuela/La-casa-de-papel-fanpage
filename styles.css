@@ -2098,6 +2098,12 @@ main {
 /* ==========================================================================
    BOTÓN FLOTANTE ESTILO MONEDA DE ORO (BANCO DE ESPAÑA / LCDP GOLD COIN)
    ========================================================================== */
+/* Ocultar la moneda flotante y su modal en la solapa de contacto */
+body.page-contacto .floating-coin-btn,
+body.page-contacto .feedback-modal-overlay {
+  display: none !important;
+}
+
 .floating-coin-btn {
   position: fixed;
   bottom: 2rem;

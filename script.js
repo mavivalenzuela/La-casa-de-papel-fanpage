@@ -260,6 +260,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* --- CONTROL DE VISIBILIDAD DE LA MONEDA FLOTANTE --- */
+  function updateFloatingCoinState(filename) {
+    const isContacto = (filename || '').includes('contacto.html');
+    if (isContacto) {
+      document.body.classList.add('page-contacto');
+      const coinBtn = document.getElementById('openFeedbackBtn');
+      if (coinBtn) coinBtn.style.display = 'none';
+      const modal = document.getElementById('feedbackModal');
+      if (modal) modal.classList.remove('active');
+    } else {
+      document.body.classList.remove('page-contacto');
+      const coinBtn = document.getElementById('openFeedbackBtn');
+      if (coinBtn) coinBtn.style.display = '';
+    }
+  }
+
+  updateFloatingCoinState(currentPath);
+
   /* --- MENÚ HAMBURGUESA MÓVIL --- */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const navList = document.getElementById('navList');
@@ -1146,6 +1164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* --- INICIALIZADOR GENERAL DE PÁGINAS Y CONTENIDO --- */
   function initPageFeatures() {
+    updateFloatingCoinState(window.location.pathname.split('/').pop() || 'index.html');
     initCharacters();
     initSeasons();
     initQuotes();
@@ -1628,6 +1647,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const targetFilename = targetUrl.pathname.split('/').pop() || 'index.html';
+        updateFloatingCoinState(targetFilename);
         document.querySelectorAll('.nav-link').forEach(link => {
           const h = link.getAttribute('href');
           if (h && (h === targetFilename || (targetFilename === '' && h === 'index.html') || h.split('?')[0] === targetFilename)) {

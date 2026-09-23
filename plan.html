@@ -750,6 +750,78 @@
 
   </main>
 
+  <!-- ==========================================================================
+       BOTÓN FLOTANTE ESTILO MONEDA DE ORO (BANCO DE ESPAÑA / LCDP)
+       ========================================================================== -->
+  <button class="floating-coin-btn" id="openFeedbackBtn" title="Buzón de Devoluciones & Mejoras">
+    <div class="coin-rim">
+      <div class="coin-face">
+        <i class="fa-solid fa-masks-theater coin-icon"></i>
+        <span class="coin-text">LCDP</span>
+      </div>
+    </div>
+    <span class="coin-tooltip">Contacto & Mejoras</span>
+  </button>
+
+  <!-- ==========================================================================
+       MODAL DE CONTACTO & DEVOLUCIONES (PROCESADO POR PHP)
+       ========================================================================== -->
+  <div class="feedback-modal-overlay" id="feedbackModal">
+    <div class="feedback-modal-card">
+      <button class="modal-close-btn" id="feedbackModalClose" aria-label="Cerrar Formulario">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="feedback-header">
+        <span class="feedback-serial-badge"><i class="fa-solid fa-fingerprint"></i> TRANSMISIÓN CIFRADA A LA
+          GUARIDA</span>
+        <h2 class="feedback-title">DEVOLUCIONES & MEJORAS</h2>
+        <p class="feedback-subtitle">
+          Envía sugerencias, reportes o mensajes para perfeccionar el plan táctico de la web.
+        </p>
+      </div>
+
+      <!-- Estado de Respuesta Dinámica -->
+      <div class="feedback-status" id="feedbackStatus"></div>
+
+      <!-- Formulario con destino a contacto.php -->
+      <form class="feedback-form" id="feedbackForm" action="contacto.php" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Alias o Nombre de Operación</label>
+          <input type="text" id="nombre" name="nombre" class="form-input"
+            placeholder="Ej: Río, Marsella, o tu nombre..." required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Canal Seguro (Correo Electrónico)</label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="tu-correo@resistencia.com"
+            required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="tipo">Tipo de Devolución</label>
+          <select id="tipo" name="tipo" class="form-select">
+            <option value="Propuesta de Mejora">Propuesta de Mejora Táctica</option>
+            <option value="Reporte de Error">Reporte de Error o Bug</option>
+            <option value="Sugerencia de Contenido">Sugerencia de Contenido</option>
+            <option value="Mensaje para La Banda">Mensaje para La Banda</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="mensaje">Detalle de tu Mensaje</label>
+          <textarea id="mensaje" name="mensaje" class="form-textarea" rows="4"
+            placeholder="Escribe aquí tu devolución o mejora para la página..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitFeedbackBtn"
+          style="justify-content: center; width: 100%; margin-top: 0.5rem;">
+          <i class="fa-solid fa-paper-plane"></i> Enviar al Profesor
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- ==========================================
        FOOTER CON REDES SOCIALES (FA ICONS)
        ========================================== -->
