@@ -73,6 +73,61 @@ document.addEventListener('DOMContentLoaded', () => {
       image: ''
     },
     {
+      id: 'helsinki',
+      codename: 'HELSINKI',
+      realname: 'Mirko Dragic',
+      category: 'banda',
+      role: 'Fuerza Pesada y Armamento',
+      desc: 'Veterano de guerra serbio con un corazón enorme. Experto en armamento pesado, leal hasta el extremo y protector incondicional de Nairobi.',
+      fullBio: 'Exmilitar serbio que combatió junto a su primo Oslo en las guerras balcánicas. A pesar de su imponente físico y su dominio letal de ametralladoras pesadas como la Browning M2, Helsinki es una persona sensible, empática y profundamente leal. Su estrecho vínculo emocional con Nairobi y Palermo lo convierte en uno de los pilares sentimentales más queridos de La Resistencia.',
+      quote: 'Tú eres mi familia ahora. Y por la familia, se da la vida.',
+      image: ''
+    },
+    {
+      id: 'oslo',
+      codename: 'OSLO',
+      realname: 'Radko Dragic',
+      category: 'banda',
+      role: 'Fuerza de Choque y Custodia',
+      desc: 'Primo de Helsinki y combatiente de las guerras balcánicas. Hombre de pocas palabras y fuerza descomunal, encargado de la contención de rehenes.',
+      fullBio: 'Veterano de guerra serbio que acompañó a Helsinki en el primer golpe a la Fábrica Nacional de Moneda y Timbre. Encargado de vigilar los accesos y la disciplina de los rehenes en los talleres. Tras sufrir una traicionera agresión de un grupo de rehenes liderados por Arturo Román, queda en coma irreversible y es despedido con dolor y dignidad por su primo Helsinki.',
+      quote: 'Tranquilo, hermano. Siempre juntos hasta el final.',
+      image: ''
+    },
+    {
+      id: 'bogota',
+      codename: 'BOGOTÁ',
+      realname: 'Santiago López',
+      category: 'banda',
+      role: 'Jefe de Soldadura y Minería Submarina',
+      desc: 'El mejor soldador del mundo bajo el agua. Vital para penetrar la cámara acorazada inundable del Banco de España y fundir las 90 toneladas de oro.',
+      fullBio: 'Soldador de plataformas petrolíferas y padre de múltiples hijos alrededor del mundo. Fiel, trabajador incansable y de temple inquebrantable. Es la pieza indispensable elegida por el Profesor para sumergirse con escafandra en la cámara acorazada sumergida y coordinar el fundido de las 90 toneladas de lingotes de oro puro en granalla.',
+      quote: 'El oro no es dinero, Sergio. El oro es la sangre de este país.',
+      image: ''
+    },
+    {
+      id: 'marsella',
+      codename: 'MARSELLA',
+      realname: 'Luka Peric',
+      category: 'banda',
+      role: 'Enlace Exterior y Operaciones Encubiertas',
+      desc: 'Operador silencioso y estratega exterior del Profesor. Exmilitar amante de los animales, clave en el transporte encubierto y la Operación París.',
+      fullBio: 'Veterano de guerra balcánico que no tolera la violencia contra los animales. Opera desde el exterior como el brazo ejecutor logístico y de distracción del Profesor. Su sangre fría y precisión le permiten burlar radares, conducir señuelos móviles y ejecutar la Operación París para extraer a Lisboa de las autoridades.',
+      quote: 'Si tocas a ese perro, te mato antes de que el Profesor termine su frase.',
+      image: ''
+    },
+    {
+      id: 'palermo',
+      codename: 'PALERMO',
+      realname: 'Martín Berrote',
+      category: 'banda',
+      role: 'Comandante en el Banco de España',
+      desc: 'Ingeniero brillante y coautor del golpe al Banco de España junto a Berlín. De temperamento volcánico, carismático y estratega implacable.',
+      fullBio: 'Amigo íntimo y enamorado en silencio de Berlín durante años en el monasterio de Florencia. Martín diseñó la hidrodinámica de la cámara sumergida y la extracción del oro por tuberías. Asume el mando operativo dentro del Banco de España, mostrando un liderazgo caótico pero de un intelecto deslumbrante.',
+      quote: '¡El plan es una obra de arte, Sergio! ¡Y yo soy quien lo va a dirigir!',
+      image: ''
+    },
+    {
       id: 'lisboa',
       codename: 'LISBOA / INSPECTORA',
       realname: 'Raquel Murillo',
@@ -92,6 +147,17 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Inspectora al mando de la contrainteligencia en el Banco de España. Negociadora astuta, implacable y dispuesta a cruzar todos los límites éticos.',
       fullBio: 'Especialista en tortura psicológica y manipulación mediática, Alicia logra descubrir el escondite del Profesor en la Parte 4, desencadenando un duelo intelectual épico.',
       quote: 'Yo no juego a la policía buena y al policía malo. Yo soy el policía terrible.',
+      image: ''
+    },
+    {
+      id: 'gandia',
+      codename: 'GANDÍA',
+      realname: 'César Gandía',
+      category: 'ley',
+      role: 'Jefe de Seguridad del Banco de España',
+      desc: 'Exsoldado de Operaciones Especiales y jefe de seguridad del Banco. Letal, fanático del deber y el peor enemigo dentro del asedio.',
+      fullBio: 'Entrenado en guerra asimétrica y contrainsurgencia, César Gandía es el enemigo más sanguinario y peligroso que enfrenta la banda dentro del Banco de España. Tras liberarse de sus esposas en la Parte 4, se refugia en la sala de pánico secreta y desata una guerra de guerrillas que culmina con la trágica muerte de Nairobi.',
+      quote: 'Ustedes juegan a ser héroes con caretas de plástico. Yo soy un soldado.',
       image: ''
     },
     {
