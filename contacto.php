@@ -30,13 +30,17 @@ $jsonData = json_decode($inputRaw, true);
 
 $nombre  = isset($_POST['nombre'])  ? trim($_POST['nombre'])  : ($jsonData['nombre']  ?? '');
 $email   = isset($_POST['email'])   ? trim($_POST['email'])   : ($jsonData['email']   ?? '');
-$tipo    = isset($_POST['tipo'])    ? trim($_POST['tipo'])    : ($jsonData['tipo']    ?? 'Mejora');
+$tipo    = isset($_POST['tipo'])    ? trim($_POST['tipo'])    : ($jsonData['tipo']    ?? 'Mensaje a La Resistencia');
+$asunto  = isset($_POST['asunto'])  ? trim($_POST['asunto'])  : ($jsonData['asunto']  ?? '');
+$ciudad  = isset($_POST['ciudad'])  ? trim($_POST['ciudad'])  : ($jsonData['ciudad']  ?? '');
 $mensaje = isset($_POST['mensaje']) ? trim($_POST['mensaje']) : ($jsonData['mensaje'] ?? '');
 
 // Sanitización de entradas
 $nombre  = htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8');
 $email   = filter_var($email, FILTER_SANITIZE_EMAIL);
 $tipo    = htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8');
+$asunto  = htmlspecialchars($asunto, ENT_QUOTES, 'UTF-8');
+$ciudad  = htmlspecialchars($ciudad, ENT_QUOTES, 'UTF-8');
 $mensaje = htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8');
 
 // Validaciones básicas
@@ -51,7 +55,7 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 if (empty($mensaje)) {
-    $errores[] = 'El mensaje o detalle de la devolución no puede estar vacío.';
+    $errores[] = 'El mensaje o detalle de la transmisión no puede estar vacío.';
 }
 
 if (strlen($mensaje) < 5) {
@@ -77,6 +81,8 @@ $nuevoMensaje = [
     'alias'      => $nombre,
     'email'      => $email,
     'tipo'       => $tipo,
+    'asunto'     => $asunto,
+    'ciudad'     => $ciudad,
     'mensaje'    => $mensaje,
     'ip_origen'  => $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1'
 ];

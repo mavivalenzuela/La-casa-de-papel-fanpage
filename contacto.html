@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto y Transmisión | La Casa de Papel - Canal Clandestino</title>
+  <meta name="description"
+    content="Canal seguro de la Resistencia. Envía mensajes al Profesor, propón atracos tácticos para La Banda, comparte comentarios de la web o reporta problemas.">
+
+  <!-- FontAwesome Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Hojas de Estilo CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ==========================================
+       HEADER & MENÚ DE NAVEGACIÓN PRINCIPAL
+       ========================================== -->
+  <header class="site-header" id="header">
+    <div class="header-container">
+
+      <!-- Marca / Logo -->
+      <a href="index.html" class="brand-logo">
+        <span class="brand-badge">LCDP</span>
+        <span>LA CASA DE PAPEL</span>
+      </a>
+
+      <!-- Menú Navegación Principal Flexbox -->
+      <nav class="main-nav" id="mainNav">
+        <ul class="nav-list" id="navList">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Inicio</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a href="personajes.html" class="nav-link">
+              Personajes <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="personajes.html?filtro=all" class="dropdown-link">
+                  <span>Todos</span> <i class="fa-solid fa-users"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="personajes.html?filtro=banda" class="dropdown-link">
+                  <span>La Banda</span> <i class="fa-solid fa-mask"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="personajes.html?filtro=ley" class="dropdown-link">
+                  <span>Policía y Ley</span> <i class="fa-solid fa-shield-halved"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="personajes.html?filtro=rehenes" class="dropdown-link">
+                  <span>Rehenes Clave</span> <i class="fa-solid fa-handcuffs"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a href="temporadas.html" class="nav-link">
+              Temporadas <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 3px;"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=1" class="dropdown-link">
+                  <span>Parte 1: El Comienzo</span> <i class="fa-solid fa-vault"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=2" class="dropdown-link">
+                  <span>Parte 2: El Escape</span> <i class="fa-solid fa-money-bill-wave"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=3" class="dropdown-link">
+                  <span>Parte 3: El Banco de España</span> <i class="fa-solid fa-building-columns"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=4" class="dropdown-link">
+                  <span>Parte 4: El Caos</span> <i class="fa-solid fa-bomb"></i>
+                </a>
+              </li>
+              <li class="dropdown-item">
+                <a href="temporadas.html?parte=5" class="dropdown-link">
+                  <span>Parte 5: La Guerra</span> <i class="fa-solid fa-shield-halved"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="plan.html" class="nav-link">El Plan</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="resistencia.html" class="nav-link">La Resistencia</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="contacto.html" class="nav-link active">Contacto</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Botones de Acción / Himno Header -->
+      <div class="header-actions">
+        <button class="sound-btn" id="soundToggle" title="Reproducir Intro (La Casa de Papel)">
+          <i class="fa-solid fa-music" id="soundIcon"></i>
+          <span>Intro LCDP</span>
+        </button>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================
+       CONTENEDOR PRINCIPAL MAIN
+       ========================================== -->
+  <main>
+
+    <!-- Banner Hero de la Página -->
+    <section class="page-hero">
+      <span class="section-tag"><i class="fa-solid fa-satellite-dish"></i> Canal Clandestino de Transmisión</span>
+      <h1 class="section-title">BUZÓN DE LA RESISTENCIA</h1>
+      <p class="section-subtitle">
+        Comunícate directamente con la base de operaciones. Envía mensajes al Profesor, propón nuevas ideas de atracos para La Banda, comparte tu opinión sobre la fan page o reporta problemas técnicos.
+      </p>
+    </section>
+
+    <!-- Sección del Formulario & Panel Táctico -->
+    <section class="section">
+      <div class="contact-layout-grid">
+
+        <!-- Formulario Cifrado Principal -->
+        <div class="contact-form-panel">
+          <div class="panel-header-badge">
+            <span class="live-dot"></span>
+            <span>TRANSMISIÓN ENCRIPTADA &bull; PROTOCOLO TOLEDO</span>
+          </div>
+
+          <form id="contactPageForm" class="contact-terminal-form" action="contacto.php" method="POST">
+            
+            <!-- Selector de Tipo de Mensaje con Tarjetas Interactivas -->
+            <div class="form-group">
+              <label class="form-label"><i class="fa-solid fa-bullseye"></i> Tipo de Transmisión:</label>
+              <div class="transmission-type-grid" id="typeSelectorGrid">
+                
+                <label class="type-card-radio active" data-type="resistencia">
+                  <input type="radio" name="tipo" value="Mensaje a La Resistencia" checked>
+                  <div class="type-card-content">
+                    <i class="fa-solid fa-flag"></i>
+                    <strong>La Resistencia</strong>
+                    <small>Apoyo o palabras a la banda</small>
+                  </div>
+                </label>
+
+                <label class="type-card-radio" data-type="atraco">
+                  <input type="radio" name="tipo" value="Idea de Atraco">
+                  <div class="type-card-content">
+                    <i class="fa-solid fa-vault"></i>
+                    <strong>Idea de Atraco</strong>
+                    <small>Propón un nuevo golpe</small>
+                  </div>
+                </label>
+
+                <label class="type-card-radio" data-type="feedback">
+                  <input type="radio" name="tipo" value="Comentarios Fan Page">
+                  <div class="type-card-content">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <strong>Fan Page</strong>
+                    <small>Opiniones y sugerencias</small>
+                  </div>
+                </label>
+
+                <label class="type-card-radio" data-type="bug">
+                  <input type="radio" name="tipo" value="Reporte de Problema">
+                  <div class="type-card-content">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <strong>Reportar Fallo</strong>
+                    <small>Problemas en el sitio</small>
+                  </div>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- Fila de Campos: Alias y Ciudad -->
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="contactNombre" class="form-label"><i class="fa-solid fa-mask"></i> Alias / Nombre Clave: <span class="required">*</span></label>
+                <input type="text" id="contactNombre" name="nombre" class="form-input" placeholder="Ej: Lisboa, Madrid, Valerio..." required>
+              </div>
+
+              <div class="form-group">
+                <label for="contactCiudad" class="form-label"><i class="fa-solid fa-location-dot"></i> Ciudad de Transmisión:</label>
+                <input type="text" id="contactCiudad" name="ciudad" class="form-input" placeholder="Ej: Buenos Aires, Madrid, Roma...">
+              </div>
+            </div>
+
+            <!-- Correo Electrónico Seguro -->
+            <div class="form-group">
+              <label for="contactEmail" class="form-label"><i class="fa-solid fa-envelope"></i> Canal Seguro (Correo Electrónico): <span class="required">*</span></label>
+              <input type="email" id="contactEmail" name="email" class="form-input" placeholder="correo_seguro@servidor.com" required>
+              <span class="field-hint">Utilizado exclusivamente para confirmar la recepción cifrada.</span>
+            </div>
+
+            <!-- Asunto de la Comunicación -->
+            <div class="form-group">
+              <label for="contactAsunto" class="form-label"><i class="fa-solid fa-pen-to-square"></i> Asunto del Mensaje:</label>
+              <input type="text" id="contactAsunto" name="asunto" class="form-input" placeholder="Ej: Plan para el Banco Central / Error en carrusel móvil...">
+            </div>
+
+            <!-- Mensaje / Detalle -->
+            <div class="form-group">
+              <label for="contactMensaje" class="form-label"><i class="fa-solid fa-message"></i> Contenido de la Transmisión: <span class="required">*</span></label>
+              <textarea id="contactMensaje" name="mensaje" class="form-textarea contact-textarea" rows="6" placeholder="Escribe aquí tu mensaje confidencial..." required></textarea>
+              <div class="textarea-footer">
+                <span id="charCount" class="field-hint">Mínimo 5 caracteres.</span>
+                <span id="contextHint" class="field-hint text-gold"><i class="fa-solid fa-circle-info"></i> Mensaje para La Resistencia</span>
+              </div>
+            </div>
+
+            <!-- Checkbox de Compromiso -->
+            <div class="form-group checkbox-group">
+              <label class="custom-checkbox-label">
+                <input type="checkbox" id="contactLoyalty" required checked>
+                <span class="checkbox-box"></span>
+                <span>Declaro lealtad a La Resistencia y juro no compartir estas coordenadas con las autoridades.</span>
+              </label>
+            </div>
+
+            <!-- Estado de Envío -->
+            <div id="contactPageStatus" class="feedback-status" style="display: none;"></div>
+
+            <!-- Botón de Envío -->
+            <button type="submit" id="contactSubmitBtn" class="btn-primary form-submit-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>TRANSMITIR A LA BASE DEL PROFESOR</span>
+            </button>
+
+          </form>
+        </div>
+
+        <!-- Barra Lateral con Información y Frecuencia de la Resistencia -->
+        <aside class="contact-sidebar">
+          
+          <!-- Tarjeta de Frecuencia de Radio Clandestina -->
+          <div class="comms-card freq-card">
+            <div class="freq-header">
+              <i class="fa-solid fa-tower-broadcast freq-icon"></i>
+              <div>
+                <h3 class="freq-title">CANAL ANALÓGICO 104.5 MHz</h3>
+                <span class="freq-status"><i class="fa-solid fa-signal"></i> Señal Segura &bull; Encriptación PGP</span>
+              </div>
+            </div>
+            <p class="freq-desc">
+              Esta frecuencia evade el monitoreo satelital de la carpa policial. Toda transmisión enviada mediante este formulario llega directamente al almacén exterior del Profesor.
+            </p>
+          </div>
+
+          <!-- Guía para Enviar Ideas de Atraco -->
+          <div class="comms-card ideas-guide-card">
+            <h4 class="card-mini-title">
+              <i class="fa-solid fa-lightbulb" style="color: var(--color-gold);"></i> ¿TIENES UNA IDEA DE ATRACO?
+            </h4>
+            <p class="guide-text">
+              El Profesor siempre busca mentes brillantes. Al proponer un golpe para la banda, considera:
+            </p>
+            <ul class="guide-checklist">
+              <li><i class="fa-solid fa-check"></i> <strong>Cero víctimas:</strong> Sin violencia ni derramamiento de sangre.</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Opinión pública:</strong> La empatía popular es el mejor escudo.</li>
+              <li><i class="fa-solid fa-check"></i> <strong>Plan de escape:</strong> La salida es tres veces más importante que la entrada.</li>
+            </ul>
+          </div>
+
+          <!-- Consejos para Reportar Problemas -->
+          <div class="comms-card bug-guide-card">
+            <h4 class="card-mini-title">
+              <i class="fa-solid fa-bug" style="color: var(--color-primary-red);"></i> SOPORTE TÉCNICO
+            </h4>
+            <p class="guide-text">
+              ¿Encontraste un fallo en la web? Indica tu dispositivo (móvil, PC), navegador y la sección donde ocurrió (personajes, audio, el plan) para que podamos corregirlo de inmediato.
+            </p>
+          </div>
+
+          <!-- Contacto Directo / Redes de la Resistencia -->
+          <div class="comms-card direct-connect-card">
+            <h4 class="card-mini-title">
+              <i class="fa-solid fa-shield-halved" style="color: var(--color-gold);"></i> CANALES DIRECTOS
+            </h4>
+            <div class="direct-channels-list">
+              <div class="channel-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                  <strong>Teléfono Rojo Analógico</strong>
+                  <span>Línea fija directa sin registro</span>
+                </div>
+              </div>
+              <div class="channel-item">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <div>
+                  <strong>Punto de Encuentro</strong>
+                  <span>Finca de Toledo / Palawan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       FOOTER CON REDES SOCIALES (FA ICONS)
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <span class="brand-badge">LCDP</span>
+            <span>LA CASA DE PAPEL</span>
+          </div>
+          <p class="footer-desc">
+            Página web dedicada a la serie "La Casa de Papel". Desarrollada para Programación IV utilizando HTML5, CSS3
+            con Flexbox, JavaScript ES6 y PHP.
+          </p>
+        </div>
+
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4 class="footer-col-title">Navegación</h4>
+            <div class="footer-menu">
+              <a href="index.html">Inicio</a>
+              <a href="personajes.html">Personajes</a>
+              <a href="temporadas.html">Resumen de Temporadas</a>
+              <a href="plan.html">El Plan Maestro</a>
+              <a href="resistencia.html">La Resistencia</a>
+              <a href="contacto.html">Buzón de Contacto</a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-col-title">Lugares Icónicos</h4>
+            <div class="footer-menu">
+              <a href="temporadas.html?parte=1">F.N.M.T. Madrid</a>
+              <a href="temporadas.html?parte=3">Banco de España</a>
+              <a href="plan.html">Finca de Toledo</a>
+              <a href="contacto.html">Canal Clandestino</a>
+            </div>
+          </div>
+
+          <!-- Redes Sociales desde FontAwesome -->
+          <div class="footer-col footer-social-section">
+            <h4 class="footer-col-title">Canales de la Banda</h4>
+            <div class="footer-social-links">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="GitHub de La Resistencia">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="Canal Twitter / X">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="Instagram Oficial">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="Transmisiones YouTube">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 La Casa de Papel Fanpage &bull; Programación IV &bull; Proyecto Web</span>
+        <span>"Bella Ciao, Bella Ciao, Bella Ciao Ciao Ciao"</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts JavaScript ES6 -->
+  <script src="script.js"></script>
+</body>
+
+</html>

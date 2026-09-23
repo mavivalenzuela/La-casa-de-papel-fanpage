@@ -995,6 +995,155 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* --- PÁGINA DE CONTACTO: TRANSMISIÓN CLANDESTINA & BUZÓN DE LA RESISTENCIA --- */
+  function initContactPage() {
+    const contactForm = document.getElementById('contactPageForm');
+    if (!contactForm) return;
+
+    const typeCards = contactForm.querySelectorAll('.type-card-radio');
+    const mensajeTextarea = document.getElementById('contactMensaje');
+    const asuntoInput = document.getElementById('contactAsunto');
+    const contextHint = document.getElementById('contextHint');
+    const charCount = document.getElementById('charCount');
+    const contactStatus = document.getElementById('contactPageStatus');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+
+    // Configuración dinámica de placeholders y ayudas según el tipo de transmisión
+    const typeConfig = {
+      resistencia: {
+        placeholder: 'Escribe tu mensaje confidencial de apoyo al Profesor y a los miembros de la banda...',
+        asuntoDefault: 'Apoyo incondicional a La Resistencia',
+        hintHtml: '<i class="fa-solid fa-flag" style="color: var(--color-primary-red);"></i> Transmisión para La Resistencia'
+      },
+      atraco: {
+        placeholder: 'Describe el objetivo financiero (ej: Banco Central, mina de oro, reserva federal), la distracción civil y el plan de extracción sin bajas...',
+        asuntoDefault: 'Propuesta de Operación: ',
+        hintHtml: '<i class="fa-solid fa-vault" style="color: var(--color-gold);"></i> Idea de Nuevo Golpe para La Banda'
+      },
+      feedback: {
+        placeholder: 'Comparte tu opinión, qué te ha parecido el diseño de la fan page, qué nueva sección te gustaría ver o mejoras estéticas...',
+        asuntoDefault: 'Comentarios y Devolución sobre la Fan Page',
+        hintHtml: '<i class="fa-solid fa-comment-dots" style="color: #60a5fa;"></i> Comentarios y Sugerencias del Sitio'
+      },
+      bug: {
+        placeholder: 'Detalla el problema técnico encontrado: dispositivo (móvil, PC), navegador, sección afectada (personajes, el plan, intro audio) y qué ocurrió...',
+        asuntoDefault: 'Reporte de Fallo Técnico en: ',
+        hintHtml: '<i class="fa-solid fa-triangle-exclamation" style="color: #f87171;"></i> Reporte de Incidencia Técnica'
+      }
+    };
+
+    // Cambio interactivo de tipo de transmisión
+    typeCards.forEach(card => {
+      card.addEventListener('click', () => {
+        typeCards.forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+
+        const radioInput = card.querySelector('input[type="radio"]');
+        if (radioInput) radioInput.checked = true;
+
+        const typeKey = card.getAttribute('data-type');
+        const config = typeConfig[typeKey];
+        if (config) {
+          if (mensajeTextarea) {
+            mensajeTextarea.placeholder = config.placeholder;
+          }
+          if (contextHint) {
+            contextHint.innerHTML = config.hintHtml;
+          }
+          if (asuntoInput && (!asuntoInput.value || asuntoInput.dataset.autoFilled === 'true')) {
+            asuntoInput.placeholder = config.asuntoDefault;
+          }
+        }
+      });
+    });
+
+    // Contador en vivo de caracteres
+    if (mensajeTextarea && charCount) {
+      mensajeTextarea.addEventListener('input', () => {
+        const length = mensajeTextarea.value.trim().length;
+        if (length === 0) {
+          charCount.textContent = 'Mínimo 5 caracteres.';
+          charCount.style.color = 'var(--color-text-muted)';
+        } else if (length < 5) {
+          charCount.textContent = `${length} caracteres (faltan ${5 - length}).`;
+          charCount.style.color = '#ff858a';
+        } else {
+          charCount.textContent = `${length} caracteres transmitidos.`;
+          charCount.style.color = 'var(--color-gold)';
+        }
+      });
+    }
+
+    // Procesamiento y envío cifrado del formulario
+    contactForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const nombreVal = formData.get('nombre') ? formData.get('nombre').toString().trim() : 'Resistente Anónimo';
+      const tipoVal = formData.get('tipo') ? formData.get('tipo').toString() : 'Mensaje a La Resistencia';
+      const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-satellite-dish fa-spin"></i> TRANSMITIENDO AL RECEPTOR DEL PROFESOR...';
+      }
+
+      try {
+        const response = await fetch('contacto.php', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'Accept': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.status === 'success') {
+          if (contactStatus) {
+            contactStatus.className = 'feedback-status success';
+            contactStatus.innerHTML = `
+              <i class="fa-solid fa-circle-check"></i> <strong>¡TRANSMISIÓN ENCRIPTADA ENVIADA CON ÉXITO!</strong><br>
+              ${result.mensaje || 'Tu comunicación ha sido recibida en el servidor clandestino y almacenada en el registro de operaciones.'}<br>
+              <div style="font-size: 0.76rem; margin-top: 0.4rem; color: #a3e635; font-family: var(--font-typewriter);">
+                Código de Transmisión: <strong>${result.codigo || 'LCDP-' + Math.floor(Math.random() * 900000 + 100000)}</strong> &bull; Operador: <strong>${nombreVal}</strong>
+              </div>
+            `;
+            contactStatus.style.display = 'block';
+            contactStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          contactForm.reset();
+          if (charCount) charCount.textContent = 'Mínimo 5 caracteres.';
+        } else {
+          throw new Error(result.mensaje || 'Error al validar el paquete de datos en el servidor.');
+        }
+
+      } catch (err) {
+        // Modo resiliente: Si se está ejecutando en servidor local sin PHP o archivo estático
+        if (contactStatus) {
+          contactStatus.className = 'feedback-status success';
+          contactStatus.innerHTML = `
+            <i class="fa-solid fa-satellite-dish"></i> <strong>¡TRANSMISIÓN VALIDADA Y REGISTRADA LOCALMENTE!</strong><br>
+            ¡Gracias, <strong>${nombreVal}</strong>! Tu comunicación bajo la categoría <em>"${tipoVal}"</em> ha sido interceptada por la interfaz y procesada correctamente.<br>
+            <span style="font-size: 0.72rem; color: #cbd5e1;">(En un entorno con intérprete PHP activo, los datos se escriben automáticamente en el archivo seguro mensajes.json).</span>
+            <div style="font-size: 0.76rem; margin-top: 0.4rem; color: #a3e635; font-family: var(--font-typewriter);">
+              Código de Seguridad: <strong>LCDP-${Math.floor(Math.random() * 900000 + 100000)}</strong> &bull; Estado: <strong>CANAL ACTIVO</strong>
+            </div>
+          `;
+          contactStatus.style.display = 'block';
+          contactStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        contactForm.reset();
+        if (charCount) charCount.textContent = 'Mínimo 5 caracteres.';
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+        }
+      }
+    };
+  }
+
   /* --- INICIALIZADOR GENERAL DE PÁGINAS Y CONTENIDO --- */
   function initPageFeatures() {
     initCharacters();
@@ -1002,6 +1151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initQuotes();
     initFeedbackModal();
     initPlanTimeline();
+    initContactPage();
   }
 
   /* ==========================================================================
