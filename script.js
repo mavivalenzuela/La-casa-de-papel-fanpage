@@ -818,12 +818,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* --- CRONOGRAMA DE OPERACIONES (EL PLAN - TABS POR TEMPORADA) --- */
+  const planSeasonsInfo = {
+    1: {
+      season: 'PARTE 1 • F.N.M.T.',
+      target: 'Fabricar 2.400M € en billetes nuevos sin registrar',
+      location: 'Fábrica Nacional de Moneda y Timbre, Madrid'
+    },
+    2: {
+      season: 'PARTE 2 • F.N.M.T. (DESENLACE)',
+      target: 'Conectar el Túnel de Palop y escapar con 984M €',
+      location: 'Cámara de calderas hacia Hangar exterior'
+    },
+    3: {
+      season: 'PARTE 3 • BANCO DE ESPAÑA',
+      target: 'Asegurar el Banco y fundir las 90 Toneladas de oro a granalla',
+      location: 'Banco de España (Cámara Acorazada Inundable)'
+    },
+    4: {
+      season: 'PARTE 4 • BANCO DE ESPAÑA (CAOS)',
+      target: 'Neutralizar a Gandía y ejecutar la Operación París (Rescate de Lisboa)',
+      location: 'Banco de España & Audiencia Nacional'
+    },
+    5: {
+      season: 'PARTE 5 • JAQUE MATE',
+      target: 'Bombear el oro al estanque de tormentas y forzar pacto con lingotes de latón',
+      location: 'Estanque de Tormentas y Fuga de Estado'
+    }
+  };
+
+  function switchPlanSeason(seasonNum) {
+    const tabs = document.querySelectorAll('.dossier-tab-btn');
+    const panels = document.querySelectorAll('.dossier-cards-grid');
+    const bannerSeason = document.getElementById('dossierBannerSeason');
+    const bannerTarget = document.getElementById('dossierBannerTarget');
+    const bannerLoc = document.getElementById('dossierBannerLoc');
+
+    if (!tabs.length || !panels.length) return;
+
+    tabs.forEach(tab => {
+      const isMatch = tab.getAttribute('data-season') == seasonNum;
+      tab.classList.toggle('active', isMatch);
+      tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
+
+    panels.forEach(panel => {
+      const isMatch = panel.getAttribute('data-season-panel') == seasonNum;
+      panel.classList.toggle('active', isMatch);
+    });
+
+    const info = planSeasonsInfo[seasonNum];
+    if (info) {
+      if (bannerSeason) bannerSeason.textContent = info.season;
+      if (bannerTarget) bannerTarget.textContent = info.target;
+      if (bannerLoc) bannerLoc.textContent = info.location;
+    }
+  }
+
+  window.switchPlanSeason = switchPlanSeason;
+
+  function initPlanTimeline() {
+    const tabs = document.querySelectorAll('.dossier-tab-btn');
+    if (!tabs.length) return;
+
+    tabs.forEach(tab => {
+      tab.onclick = () => {
+        const season = tab.getAttribute('data-season');
+        if (season) switchPlanSeason(season);
+      };
+    });
+
+    // Detectar si la URL incluye parámetro ?temporada=X o ?parte=X
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramSeason = urlParams.get('temporada') || urlParams.get('parte');
+      if (paramSeason && planSeasonsInfo[paramSeason]) {
+        switchPlanSeason(paramSeason);
+      }
+    } catch (e) {
+      // Ignorar si URL no disponible
+    }
+  }
+
   /* --- INICIALIZADOR GENERAL DE PÁGINAS Y CONTENIDO --- */
   function initPageFeatures() {
     initCharacters();
     initSeasons();
     initQuotes();
     initFeedbackModal();
+    initPlanTimeline();
   }
 
   /* ==========================================================================

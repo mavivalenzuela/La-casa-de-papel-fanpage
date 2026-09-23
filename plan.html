@@ -355,38 +355,93 @@
     <!-- ====================================================================
          4. LAS CUATRO FASES TÁCTICAS DEL ATRACO (ESTILO EXPEDIENTE / DOSSIER)
          ==================================================================== -->
-    <section class="phases-dossier-section">
+    <section class="phases-dossier-section" id="cronogramaSection">
       <div class="dossier-header">
         <span class="section-tag"><i class="fa-solid fa-folder-closed"></i> Cronograma de Operaciones</span>
-        <h2 class="section-title">LAS CUATRO FASES DE LA OPERACIÓN</h2>
+        <h2 class="section-title">CRONOGRAMA TÁCTICO POR TEMPORADAS</h2>
         <p class="section-subtitle">
-          El desarrollo táctico paso a paso diseñado en las pizarras y cuadernos de la Finca de Toledo.
+          Elige una temporada para desplegar el expediente táctico y las cuatro fases operativas ideadas por El Profesor.
         </p>
+
+        <!-- Selector de Temporadas Estilo Pestañas de Expediente Confidencial -->
+        <div class="dossier-season-tabs" id="dossierSeasonTabs" role="tablist" aria-label="Seleccionar cronograma de temporada">
+          <button class="dossier-tab-btn active" data-season="1" role="tab" aria-selected="true" aria-controls="seasonPanel1">
+            <span class="tab-badge">T1</span>
+            <span class="tab-label">
+              <strong>TEMPORADA 1</strong>
+              <small>Fábrica de Moneda &bull; Infiltración</small>
+            </span>
+          </button>
+          <button class="dossier-tab-btn" data-season="2" role="tab" aria-selected="false" aria-controls="seasonPanel2">
+            <span class="tab-badge">T2</span>
+            <span class="tab-label">
+              <strong>TEMPORADA 2</strong>
+              <small>El Túnel de Palop &bull; La Fuga</small>
+            </span>
+          </button>
+          <button class="dossier-tab-btn" data-season="3" role="tab" aria-selected="false" aria-controls="seasonPanel3">
+            <span class="tab-badge">T3</span>
+            <span class="tab-label">
+              <strong>TEMPORADA 3</strong>
+              <small>Banco de España &bull; Inundación</small>
+            </span>
+          </button>
+          <button class="dossier-tab-btn" data-season="4" role="tab" aria-selected="false" aria-controls="seasonPanel4">
+            <span class="tab-badge">T4</span>
+            <span class="tab-label">
+              <strong>TEMPORADA 4</strong>
+              <small>Resistencia &bull; Operación París</small>
+            </span>
+          </button>
+          <button class="dossier-tab-btn" data-season="5" role="tab" aria-selected="false" aria-controls="seasonPanel5">
+            <span class="tab-badge">T5</span>
+            <span class="tab-label">
+              <strong>TEMPORADA 5</strong>
+              <small>Jaque Mate &bull; El Oro y el Latón</small>
+            </span>
+          </button>
+        </div>
+
+        <!-- Banner Dinámico del Expediente Activo -->
+        <div class="dossier-active-banner" id="dossierActiveBanner">
+          <div class="dossier-banner-stamp">
+            <i class="fa-solid fa-stamp"></i> EXPEDIENTE: <span id="dossierBannerSeason">PARTE 1 &bull; F.N.M.T.</span>
+          </div>
+          <div class="dossier-banner-info">
+            <span class="dossier-banner-target"><i class="fa-solid fa-bullseye"></i> <strong>Objetivo:</strong> <span id="dossierBannerTarget">Fabricar 2.400M € en billetes nuevos sin registrar</span></span>
+            <span class="dossier-banner-loc"><i class="fa-solid fa-location-dot"></i> <span id="dossierBannerLoc">Fábrica Nacional de Moneda y Timbre, Madrid</span></span>
+          </div>
+        </div>
       </div>
 
-      <div class="dossier-cards-grid">
+      <!-- ==============================================
+           PANEL TEMPORADA 1: EL ASALTO A LA FÁBRICA
+           ============================================== -->
+      <div class="dossier-cards-grid active" id="seasonPanel1" data-season-panel="1" role="tabpanel">
         <!-- Fase 1 -->
         <div class="dossier-card">
           <div class="dossier-tab">FASE I &bull; MINUTO 0 A 15</div>
           <div class="dossier-body">
             <span class="dossier-step-title">Infiltración y Control</span>
-            <p>Asalto al convoy de bobinas de papel moneda. Toma relámpago de la Fábrica Nacional de Moneda y Timbre, desconexión de teléfonos fijos y colocación de monos rojos y caretas de Dalí a los 67 rehenes.</p>
+            <p>Asalto al convoy de bobinas de papel moneda. Toma relámpago de la Fábrica Nacional de Moneda y Timbre, desconexión de comunicaciones y colocación de monos rojos y caretas de Dalí a los 67 rehenes para anular la ventaja visual táctica de la policía.</p>
             <div class="dossier-meta">
               <span><i class="fa-solid fa-clock"></i> Tiempo: 15 minutos</span>
               <span><i class="fa-solid fa-users"></i> Rehenes: 67 controlados</span>
+              <span><i class="fa-solid fa-masks-theater"></i> Disfraz: Dalí + Mono Rojo</span>
             </div>
           </div>
         </div>
 
         <!-- Fase 2 -->
         <div class="dossier-card">
-          <div class="dossier-tab">FASE II &bull; DÍA 1 A 11</div>
+          <div class="dossier-tab">FASE II &bull; DÍAS 1 A 5</div>
           <div class="dossier-body">
             <span class="dossier-step-title">La Impresión Masiva</span>
-            <p>Puesta en marcha de las rotativas con Nairobi al mando. Turnos de impresión continuos de billetes nuevos de 50€, totalizando más de 2.400 millones de euros mientras se simula un asedio policial pasivo.</p>
+            <p>Puesta en marcha de las rotativas con Nairobi al mando. Turnos continuos de impresión de billetes nuevos de 50€, iniciando la fabricación de papel moneda no registrado mientras se simula un asedio policial pasivo.</p>
             <div class="dossier-meta">
               <span><i class="fa-solid fa-money-bill-wave"></i> Ritmo: 8M € / hora</span>
               <span><i class="fa-solid fa-gears"></i> Rotativas: En operación 24/7</span>
+              <span><i class="fa-solid fa-user-check"></i> Mando: Nairobi ("Empieza el matriarcado")</span>
             </div>
           </div>
         </div>
@@ -396,10 +451,72 @@
           <div class="dossier-tab">FASE III &bull; EN PARALELO</div>
           <div class="dossier-body">
             <span class="dossier-step-title">Guerra Psicológica y Opinión</span>
-            <p>Negociación directa por el teléfono rojo entre El Profesor y la Inspectora Murillo. Desinformación selectiva, filtraciones a la prensa y actos de empatía con los rehenes para ganar la simpatía popular.</p>
+            <p>Negociación directa por el teléfono rojo entre El Profesor y la Inspectora Raquel Murillo. Desinformación táctica, infiltración del micrófono en las gafas de Ángel (Caballo de Troya) y manipulación de la opinión pública.</p>
             <div class="dossier-meta">
-              <span><i class="fa-solid fa-phone"></i> Canal: Línea analógica</span>
-              <span><i class="fa-solid fa-bullhorn"></i> Prensa: Apoyo popular</span>
+              <span><i class="fa-solid fa-phone"></i> Canal: Línea analógica no rastreable</span>
+              <span><i class="fa-solid fa-glasses"></i> Inteligencia: Caballo de Troya (Ángel)</span>
+              <span><i class="fa-solid fa-bullhorn"></i> Opinión: Simpatía popular masiva</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE IV &bull; DÍAS 5 A 6</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Contención Bélica y Escudo Dalí</span>
+            <p>Repulsión del asalto táctico de los GEOs utilizando fuego disuasorio con la ametralladora pesada Browning M2. Rehenes y asaltantes visten idénticos en la azotea, impidiendo el fuego de francotiradores policiales.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-crosshairs"></i> Balística: Browning M2 disuasoria</span>
+              <span><i class="fa-solid fa-shield-halved"></i> Escudo: Falso grupo en la azotea</span>
+              <span><i class="fa-solid fa-heart-pulse"></i> Regla de Oro: Cero bajas mortales</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL TEMPORADA 2: EL TÚNEL Y LA FUGA (FNMT)
+           ============================================== -->
+      <div class="dossier-cards-grid" id="seasonPanel2" data-season-panel="2" role="tabpanel">
+        <!-- Fase 1 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE I &bull; DÍAS 7 A 9</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">La Perforación del Túnel de Palop</span>
+            <p>Moscú y su cuadrilla trabajan sin descanso perforando el suelo de hormigón armado en la cámara de calderas hasta conectar con el túnel subterráneo excavado previamente desde el almacén exterior del Profesor.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-trowel-bricks"></i> Perforación: 5 metros de hormigón</span>
+              <span><i class="fa-solid fa-person-digging"></i> Responsable: Moscú</span>
+              <span><i class="fa-solid fa-route"></i> Conexión: Calderas &rarr; Hangar exterior</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE II &bull; DÍAS 9 A 10</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Contrainteligencia y Finca Toledo</span>
+            <p>La policía localiza la Finca de Toledo. El Profesor se disfraza de indigente para infiltrarse en el coche policial de Raquel y destruir las huellas de ADN antes del análisis científico, preservando la identidad de la banda.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-mask"></i> Camuflaje: El vagabundo del desguace</span>
+              <span><i class="fa-solid fa-biohazard"></i> Evidencias: Destrucción total de ADN</span>
+              <span><i class="fa-solid fa-chess-knight"></i> Maniobra: Contrainteligencia directa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE III &bull; DÍA 11</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">El Sacrificio de Retaguardia</span>
+            <p>Asalto definitivo de las fuerzas especiales GEOs. Berlín toma el mando de la ametralladora en el pasillo principal, sacrificando su vida para contener el fuego enemigo y garantizar los minutos de escape al resto del equipo.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-gun"></i> Posición: Trinchera del pasillo central</span>
+              <span><i class="fa-solid fa-medal"></i> Sacrificio: Berlín resiste hasta el final</span>
+              <span><i class="fa-solid fa-stopwatch"></i> Tiempo ganado: 12 minutos cruciales</span>
             </div>
           </div>
         </div>
@@ -408,11 +525,195 @@
         <div class="dossier-card">
           <div class="dossier-tab">FASE IV &bull; DÍA 11 (DESLACE)</div>
           <div class="dossier-body">
-            <span class="dossier-step-title">El Túnel de Palop y la Fuga</span>
-            <p>Apertura del túnel excavado desde la cámara de calderas hasta el almacén exterior del Profesor. Evacuación de la banda junto a los sacos de billetes mientras los GEOS entran a un edificio vacío.</p>
+            <span class="dossier-step-title">Plan Alcatraz y Fuga Internacional</span>
+            <p>Evacuación de 984 millones de euros prensados a través del túnel de Palop hacia el almacén. El dinero se carga en un camión cervecero camuflado y los miembros de la banda se dispersan por el mundo con nuevas identidades hacia Palawan.</p>
             <div class="dossier-meta">
-              <span><i class="fa-solid fa-tunnel"></i> Salida: Túnel de Palop</span>
-              <span><i class="fa-solid fa-truck-fast"></i> Destino: Palawan / Fuga</span>
+              <span><i class="fa-solid fa-sack-dollar"></i> Botín final: 984 Millones de Euros</span>
+              <span><i class="fa-solid fa-truck"></i> Transporte: Camión cervecero camuflado</span>
+              <span><i class="fa-solid fa-plane-departure"></i> Destino: Palawan (Filipinas)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL TEMPORADA 3: EL ASALTO AL BANCO DE ESPAÑA
+           ============================================== -->
+      <div class="dossier-cards-grid" id="seasonPanel3" data-season-panel="3" role="tabpanel">
+        <!-- Fase 1 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE I &bull; DÍA 0</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Lluvia de 140 Millones en Madrid</span>
+            <p>Dos zepelines gigantes sobrevuelan el cielo de Madrid soltando 140 millones de euros en billetes sobre el Paseo de la Castellana. El colapso y júbilo civil paralizan las fuerzas de seguridad, creando el escudo ideal para rescatar a Río.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-parachute-box"></i> Lanzamiento: 140M € en zepelines</span>
+              <span><i class="fa-solid fa-people-group"></i> Efecto: Caos y colapso ciudadano</span>
+              <span><i class="fa-solid fa-bullseye"></i> Motivo: Rescate de Río en Panamá</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE II &bull; MINUTO 0 A 15</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Suplantación del Convoy Militar</span>
+            <p>La banda se disfraza con uniformes de combate y blindados BMR del Ejército de Tierra. Escoltando a un falso general, entran por la puerta principal del Banco de España ante los saludos oficiales de la guardia de seguridad.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-truck-monster"></i> Vehículos: Blindados militares del Ejército</span>
+              <span><i class="fa-solid fa-id-card-clip"></i> Infiltración: Falso general y escolta</span>
+              <span><i class="fa-solid fa-building-columns"></i> Objetivo: Banco de España asegurado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE III &bull; HORAS 1 A 24</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Inundación y Acceso Submarino</span>
+            <p>Activación automática del sistema de defensa hidráulico que inunda la cámara acorazada con agua de la Fuente de Cibeles. Bogotá y su equipo de soldadores descienden con escafandras autónomas para perforar la puerta a 48 metros bajo tierra.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-water"></i> Trampa: Cámara submarina anegada</span>
+              <span><i class="fa-solid fa-person-swimming"></i> Especialista: Bogotá con escafandra</span>
+              <span><i class="fa-solid fa-vault"></i> Botín: 90 Toneladas de oro puro</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE IV &bull; DÍA 2</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Fundición a Granalla y Defensa Antitanque</span>
+            <p>Instalación de hornos industriales en la cámara para fundir los lingotes a 1.064 °C convirtiéndolos en granalla milimétrica. Paralelamente, Tokio y Denver detonan un proyectil RPG antitanque contra un blindado tras declarar el Profesor "estado de guerra".</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-fire-burner"></i> Fundición: Horno a 1.064 °C (Granalla)</span>
+              <span><i class="fa-solid fa-rocket"></i> Defensa: Misil RPG contra blindado</span>
+              <span><i class="fa-solid fa-skull-crossbones"></i> Declaración: "Esto ya no es un atraco, es una guerra"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL TEMPORADA 4: RESISTENCIA Y OPERACIÓN PARÍS
+           ============================================== -->
+      <div class="dossier-cards-grid" id="seasonPanel4" data-season-panel="4" role="tabpanel">
+        <!-- Fase 1 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE I &bull; DÍAS 3 A 4</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">El Asesino Interno (César Gandía)</span>
+            <p>Gandía, jefe de seguridad del Banco y excomando de operaciones especiales, logra zafarse y atrincherarse en la sala de pánico secreta blindada. Corta cámaras y comunicaciones internas e inicia una cacería armada dentro del edificio.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-user-ninja"></i> Amenaza: Gandía (Operaciones Especiales)</span>
+              <span><i class="fa-solid fa-door-closed"></i> Fortaleza: Sala de pánico secreta</span>
+              <span><i class="fa-solid fa-triangle-exclamation"></i> Sabotaje: Red de cámaras inutilizada</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE II &bull; DÍAS 4 A 5</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Cirugía Bajo Fuego y Duelo con Sierra</span>
+            <p>Nairobi recibe un disparo crítico en el tórax tras la emboscada psicológica de la inspectora Alicia Sierra con su hijo. Tokio opera una toracotomía de urgencia en un quirófano improvisado guiada por videoconferencia cifrada con cirujanos de Islamabad.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-kit-medical"></i> Cirugía: Toracotomía de urgencia</span>
+              <span><i class="fa-solid fa-satellite-dish"></i> Enlace: Islamabad vía satélite cifrado</span>
+              <span><i class="fa-solid fa-dove"></i> Lema: "Por Nairobi" (Resistencia)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE III &bull; DÍA 5</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Despliegue de la Operación París</span>
+            <p>Tras la captura y detención clandestina de Lisboa (Raquel Murillo), El Profesor ejecuta la Operación París: un falso túnel excavado bajo los juzgados de la Audiencia Nacional y un equipo de mineros que sustituyen a Raquel durante su traslado judicial.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-handcuffs"></i> Misión: Rescate de Raquel Murillo</span>
+              <span><i class="fa-solid fa-trowel"></i> Táctica: Falso túnel en el juzgado</span>
+              <span><i class="fa-solid fa-users-gear"></i> Apoyo: Cuadrilla de mineros de rescate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE IV &bull; DÍA 5 (DESLACE)</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Infiltración en Helicóptero Militar</span>
+            <p>Lisboa es trasladada en un helicóptero Eurocopter militar clonado con los códigos oficiales del Ejército. Aterriza en la azotea del Banco engañando al mismísimo general Tamayo, entrando al edificio al grito unánime de ¡Por Nairobi!</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-helicopter"></i> Aeronave: Eurocopter militar clonado</span>
+              <span><i class="fa-solid fa-building-flag"></i> Aterrizaje: Azotea del Banco de España</span>
+              <span><i class="fa-solid fa-flag"></i> Grito de Guerra: "¡Por Nairobi, por el honor!"</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==============================================
+           PANEL TEMPORADA 5: EL JAQUE MATE Y EL LATÓN
+           ============================================== -->
+      <div class="dossier-cards-grid" id="seasonPanel5" data-season-panel="5" role="tabpanel">
+        <!-- Fase 1 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE I &bull; DÍA 6</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Extracción por el Estanque de Tormentas</span>
+            <p>Conexión de las bombas pluviales de alta presión al colector del alcantarillado subterráneo de Madrid. Se bombean 90 toneladas de granalla de oro mezcladas con agua a lo largo de 18 km hasta el estanque de tormentas donde espera el Profesor.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-faucet-drip"></i> Bombeo: 50 kg de oro / minuto</span>
+              <span><i class="fa-solid fa-water-ladder"></i> Red: Alcantarillado pluvial de Madrid</span>
+              <span><i class="fa-solid fa-warehouse"></i> Destino: Estanque de Tormentas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 2 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE II &bull; DÍA 7</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Combate Bélico y Sacrificio de Tokio</span>
+            <p>El comando de élite militar del comandante Sagasta detona el tejado y cerca al grupo. Tokio, con múltiples impactos de bala, cubre la retirada de Denver y Manila atrincherada en la cocina, inmolándose con un cinturón de granadas que fulmina a Gandía.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-shield-virus"></i> Asalto: Comando de élite de Sagasta</span>
+              <span><i class="fa-solid fa-bomb"></i> Inmolación: Cinturón de granadas M67</span>
+              <span><i class="fa-solid fa-heart"></i> Sacrificio: Tokio salva a Denver y Manila</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 3 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE III &bull; DÍA 8</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">El Gran Cambiazo: Lingotes de Latón</span>
+            <p>El Profesor entrega al Estado camiones cargados con lingotes de latón bañados en oro para reponer la reserva nacional en la cámara. Si el gobierno revela el cambiazo, la economía nacional quiebra; si lo oculta, el secreto de Estado queda blindado.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-gem"></i> El Secreto: Lingotes de latón electrochapado</span>
+              <span><i class="fa-solid fa-arrow-trend-up"></i> Economía: Prima de riesgo blindada</span>
+              <span><i class="fa-solid fa-handshake"></i> Pacto: Tamayo firma el Secreto de Estado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fase 4 -->
+        <div class="dossier-card">
+          <div class="dossier-tab">FASE IV &bull; DÍA 8 (DESLACE)</div>
+          <div class="dossier-body">
+            <span class="dossier-step-title">Falsa Muerte y Fuga Diplomática</span>
+            <p>La banda es sacada del Banco en féretros bajo escolta oficial del Ejército, fingiendo ante el mundo su ejecución militar. En un aeródromo militar, reciben pasaportes diplomáticos legítimos y parten en helicóptero hacia una vida libre y multimillonaria.</p>
+            <div class="dossier-meta">
+              <span><i class="fa-solid fa-coffin"></i> Salida: Féretros bajo escolta del Estado</span>
+              <span><i class="fa-solid fa-passport"></i> Identidades: Pasaportes nuevos legítimos</span>
+              <span><i class="fa-solid fa-champagne-glasses"></i> Estado final: 90T de oro y libertad total</span>
             </div>
           </div>
         </div>
