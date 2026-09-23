@@ -194,6 +194,14 @@ main {
   position: relative;
 }
 
+.dropdown .nav-link i.fa-chevron-down {
+  transition: transform var(--transition-fast);
+}
+
+.dropdown:hover .nav-link i.fa-chevron-down {
+  transform: rotate(180deg);
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -210,6 +218,16 @@ main {
   transition: var(--transition-medium);
   display: flex;
   flex-direction: column;
+}
+
+/* Puente invisible para evitar que el hover se pierda entre el nav-link y el menú */
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -2494,6 +2512,21 @@ main {
     padding: 1.8rem;
     border-bottom: 1px solid var(--color-border);
     backdrop-filter: blur(15px);
+  }
+
+  .nav-list.mobile-active .dropdown-menu {
+    position: static;
+    transform: none !important;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    border-left: 2px solid var(--color-primary-red);
+    margin-left: 0.8rem;
+    margin-top: 0.3rem;
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    padding: 0.3rem 0;
   }
 
   .hamburger-btn {

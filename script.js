@@ -454,23 +454,37 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
+    /* Función global para filtrar personajes y actualizar interfaz */
+    window.filterCharacters = function(filterVal) {
+      if (filterBtns.length > 0) {
+        filterBtns.forEach(b => {
+          if (b.getAttribute('data-filter') === filterVal) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+      renderCharacters(filterVal);
+      if (carouselViewport) {
+        carouselViewport.scrollLeft = 0;
+      }
+      setTimeout(updateCarouselArrows, 60);
+    };
+
     if (filterBtns.length > 0) {
       filterBtns.forEach(btn => {
         btn.onclick = () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
           const filterValue = btn.getAttribute('data-filter');
-          renderCharacters(filterValue);
-          if (carouselViewport) {
-            carouselViewport.scrollLeft = 0;
-          }
-          setTimeout(updateCarouselArrows, 60);
+          window.filterCharacters(filterValue);
         };
       });
     }
 
     if (characterGrid) {
-      renderCharacters('all');
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialFilter = urlParams.get('filtro') || urlParams.get('filter') || 'all';
+      window.filterCharacters(initialFilter);
       setTimeout(updateCarouselArrows, 100);
       window.addEventListener('resize', updateCarouselArrows);
     }
@@ -1522,6 +1536,21 @@ document.addEventListener('DOMContentLoaded', () => {
         link.closest('.footer-menu') || 
         href.endsWith('.html') || 
         href.includes('.html?')) {
+      
+      // Si ya estamos en personajes.html y es un enlace de filtro de personajes, filtrar directamente sin recarga
+      if (href.includes('personajes.html') && window.location.pathname.endsWith('personajes.html')) {
+        const targetUrl = new URL(href, window.location.href);
+        const targetFilter = targetUrl.searchParams.get('filtro') || targetUrl.searchParams.get('filter') || 'all';
+        if (typeof window.filterCharacters === 'function') {
+          e.preventDefault();
+          window.history.pushState({ path: href }, document.title, href);
+          window.filterCharacters(targetFilter);
+          const navList = document.getElementById('navList');
+          if (navList) navList.classList.remove('mobile-active');
+          return;
+        }
+      }
+
       e.preventDefault();
       const navList = document.getElementById('navList');
       if (navList) navList.classList.remove('mobile-active');
