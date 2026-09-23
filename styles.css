@@ -1125,14 +1125,12 @@ main {
   width: 100%;
   height: 2px;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 0, 0, 0.06) 15%,
-    rgba(255, 255, 255, 0.4) 50%,
-    rgba(0, 0, 0, 0.06) 85%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.06) 15%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(0, 0, 0, 0.06) 85%,
+      transparent 100%);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
@@ -1367,11 +1365,9 @@ main {
 .paper-sheet {
   position: relative;
   background-color: #faf7ee;
-  background-image: repeating-linear-gradient(
-    transparent,
-    transparent 27px,
-    rgba(30, 80, 160, 0.09) 28px
-  );
+  background-image: repeating-linear-gradient(transparent,
+      transparent 27px,
+      rgba(30, 80, 160, 0.09) 28px);
   color: #1e1e24;
   border-radius: 3px;
   padding: 2.6rem 1.8rem 1.6rem;
@@ -1384,12 +1380,29 @@ main {
   cursor: default;
 }
 
-.paper-sheet-1 { transform: rotate(-1.5deg); }
-.paper-sheet-2 { transform: rotate(1.2deg); }
-.paper-sheet-3 { transform: rotate(-0.8deg); }
-.paper-sheet-4 { transform: rotate(1.4deg); }
-.paper-sheet-5 { transform: rotate(-1.1deg); }
-.paper-sheet-6 { transform: rotate(0.9deg); }
+.paper-sheet-1 {
+  transform: rotate(-1.5deg);
+}
+
+.paper-sheet-2 {
+  transform: rotate(1.2deg);
+}
+
+.paper-sheet-3 {
+  transform: rotate(-0.8deg);
+}
+
+.paper-sheet-4 {
+  transform: rotate(1.4deg);
+}
+
+.paper-sheet-5 {
+  transform: rotate(-1.1deg);
+}
+
+.paper-sheet-6 {
+  transform: rotate(0.9deg);
+}
 
 .paper-sheet:hover {
   transform: translateY(-8px) rotate(0deg) scale(1.02);
@@ -1823,6 +1836,7 @@ main {
     opacity: 0;
     transform: translateY(14px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
