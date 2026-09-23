@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'lisboa',
       codename: 'LISBOA / INSPECTORA',
       realname: 'Raquel Murillo',
-      category: 'ley',
-      role: 'Negociadora / Táctica',
+      category: ['banda', 'ley'],
+      role: 'Negociadora / Táctica de La Banda',
       desc: 'Inspectora al mando de la negociación en el primer atraco que acaba enamorándose del Profesor y uniéndose a la banda bajo el alias Lisboa.',
       fullBio: 'Brillante estratega policial que descubre la manipulación psicológica del Profesor mientras toma un café con él bajo la identidad de Salvador. Tras entender sus motivos, se pasa al bando de la Resistencia.',
       quote: 'En los atracos, la clave no es el dinero, es ganar tiempo.',
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'estocolmo',
       codename: 'ESTOCOLMO',
       realname: 'Mónica Gaztambide',
-      category: 'rehenes',
+      category: ['banda', 'rehenes'],
       role: 'Rehén Convertida en Banda',
       desc: 'Secretaria de la F.N.M.T. que sufre el síndrome de Estocolmo tras enamorarse de Denver, convirtiéndose en un miembro oficial en el Banco de España.',
       fullBio: 'Embarazada durante el primer atraco, Mónica encuentra la valentía para tomar las armas y defender a Denver y a la banda frente a los asaltos de las fuerzas especiales.',
@@ -281,7 +281,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!characterGrid) return;
     characterGrid.innerHTML = '';
 
-    const filtered = characters.filter(c => filter === 'all' || c.category === filter);
+    const filtered = characters.filter(c => {
+      if (filter === 'all') return true;
+      if (Array.isArray(c.category)) return c.category.includes(filter);
+      return c.category === filter;
+    });
 
     if (filter === 'ley' || filter === 'rehenes' || filtered.length <= 2) {
       characterGrid.classList.add('is-centered');
@@ -301,10 +305,21 @@ document.addEventListener('DOMContentLoaded', () => {
              <span style="font-size: 0.72rem; color: var(--color-text-muted); margin-top: 0.4rem;">[ Sin imagen ]</span>
            </div>`;
 
+      let badgeLabel = 'La Banda';
+      if (Array.isArray(char.category)) {
+        if (filter === 'ley') badgeLabel = 'Ley';
+        else if (filter === 'rehenes') badgeLabel = 'Rehén';
+        else badgeLabel = 'La Banda';
+      } else if (char.category === 'ley') {
+        badgeLabel = 'Ley';
+      } else if (char.category === 'rehenes') {
+        badgeLabel = 'Rehén';
+      }
+
       card.innerHTML = `
         <div class="card-image-wrap">
           ${imageMarkup}
-          <span class="card-badge">${char.category === 'banda' ? 'La Banda' : (char.category === 'ley' ? 'Ley' : 'Rehén')}</span>
+          <span class="card-badge">${badgeLabel}</span>
         </div>
         <div class="card-content">
           <h3 class="character-codename">${char.codename}</h3>
