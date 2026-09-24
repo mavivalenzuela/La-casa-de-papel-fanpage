@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Mente maestra detrás de los atracos a la Fábrica Nacional de Moneda y Timbre y al Banco de España. Analítico, metodológico y siempre 10 pasos adelante.',
       fullBio: 'Sergio pasó gran parte de su infancia en hospitales escuchando a su padre planear el mayor atraco jamás imaginado. Tras la muerte de su padre, dedicó su vida a perfeccionar cada detalle táctico, político y psicológico para ejecutar los dos golpes financieros más ambiciosos del mundo sin víctimas fatales.',
       quote: 'Lo importante no es lo que nos pase, sino lo que vamos a hacer con ello.',
-      image: 'img/profesor.png'
+      image: 'IMAGENES OPTIMIZADAS/el profesor.jpg'
     },
     {
       id: 'tokio',
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Fieramente independiente, impulsiva y leal. Tokio es la voz narrativa de la historia y una guerrera formidable en situaciones de combate extremo.',
       fullBio: 'Marcada por una vida de atracos menores y pérdidas trágicas, Silene fue reclutada por El Profesor cuando estaba a punto de ser capturada. Su temperamento explosivo a menudo desafía la disciplina de la banda, pero su valentía incondicional la convierte en el corazón combatiente de La Resistencia.',
       quote: 'Al fin y al cabo, el amor es lo que nos hace ver la vida de otro color, y últimamente, todo ha sido negro.',
-      image: 'img/tokio.png'
+      image: 'IMAGENES OPTIMIZADAS/tokio.jpg'
     },
     {
       id: 'berlin',
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Hermano mayor del Profesor y al mando directo dentro de la Fábrica de Moneda. Narcisista, sofisticado, frío pero con un oscuro sentido del honor.',
       fullBio: 'Afectado por la enfermedad rara de Helmer, Andrés vive cada segundo con la intensidad de quien sabe que su tiempo se agota. Su liderazgo firme e implacable mantiene el orden en el atraco, sacrificándose heroicamente para permitir la fuga de sus compañeros en la Parte 2.',
       quote: 'La muerte puede ser la mayor oportunidad de tu vida.',
-      image: 'img/berlin.png'
+      image: 'IMAGENES OPTIMIZADAS/Berlin.jpg'
     },
     {
       id: 'nairobi',
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Carismática, optimista y líder nata. Encargada de supervisar la producción de billetes y el fundido de las 90 toneladas de oro puro.',
       fullBio: 'Experta falsificadora desde muy joven, Nairobi se une al plan con el sueño de recuperar la custodia de su hijo Axel. Su energía motivacional inspira tanto a la banda como a los propios rehenes en los talleres de producción.',
       quote: '¡Empieza el matriarcado!',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Nahirobi.jpg'
     },
     {
       id: 'denver',
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Conocido por su risa inconfundible y su carácter noble. Hijo de Moscú, Denver pasa de ser un joven pendenciero a un protector abnegado.',
       fullBio: 'Se unió al atraco junto a su padre Moscú. Su compasión por Mónica Gaztambide durante el primer secuestro demuestra su gran corazón bajo una fachada de chico duro.',
       quote: 'Si me matan, no te preocupes. Moriré riéndome.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Denver.jpg'
     },
     {
       id: 'rio',
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'El miembro más joven de la banda. Prodigio informático capaz de vulnerar los sistemas de seguridad satelitales y militares más avanzados.',
       fullBio: 'Reclutado por el Profesor por sus habilidades cibernéticas. Su captura por las autoridades internacionales en Panamá se convierte en el detonante para el segundo atraco al Banco de España.',
       quote: 'Para mí el Profesor es como un dios. No falla nunca.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/rio.jpg'
     },
     {
       id: 'helsinki',
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Veterano de guerra serbio con un corazón enorme. Experto en armamento pesado, leal hasta el extremo y protector incondicional de Nairobi.',
       fullBio: 'Exmilitar serbio que combatió junto a su primo Oslo en las guerras balcánicas. A pesar de su imponente físico y su dominio letal de ametralladoras pesadas como la Browning M2, Helsinki es una persona sensible, empática y profundamente leal. Su estrecho vínculo emocional con Nairobi y Palermo lo convierte en uno de los pilares sentimentales más queridos de La Resistencia.',
       quote: 'Tú eres mi familia ahora. Y por la familia, se da la vida.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Helsinki.jpg'
     },
     {
       id: 'oslo',
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Primo de Helsinki y combatiente de las guerras balcánicas. Hombre de pocas palabras y fuerza descomunal, encargado de la contención de rehenes.',
       fullBio: 'Veterano de guerra serbio que acompañó a Helsinki en el primer golpe a la Fábrica Nacional de Moneda y Timbre. Encargado de vigilar los accesos y la disciplina de los rehenes en los talleres. Tras sufrir una traicionera agresión de un grupo de rehenes liderados por Arturo Román, queda en coma irreversible y es despedido con dolor y dignidad por su primo Helsinki.',
       quote: 'Tranquilo, hermano. Siempre juntos hasta el final.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Oslo.jpg'
     },
     {
       id: 'bogota',
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'El mejor soldador del mundo bajo el agua. Vital para penetrar la cámara acorazada inundable del Banco de España y fundir las 90 toneladas de oro.',
       fullBio: 'Soldador de plataformas petrolíferas y padre de múltiples hijos alrededor del mundo. Fiel, trabajador incansable y de temple inquebrantable. Es la pieza indispensable elegida por el Profesor para sumergirse con escafandra en la cámara acorazada sumergida y coordinar el fundido de las 90 toneladas de lingotes de oro puro en granalla.',
       quote: 'El oro no es dinero, Sergio. El oro es la sangre de este país.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Bogota.jpg'
     },
     {
       id: 'marsella',
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Operador silencioso y estratega exterior del Profesor. Exmilitar amante de los animales, clave en el transporte encubierto y la Operación París.',
       fullBio: 'Veterano de guerra balcánico que no tolera la violencia contra los animales. Opera desde el exterior como el brazo ejecutor logístico y de distracción del Profesor. Su sangre fría y precisión le permiten burlar radares, conducir señuelos móviles y ejecutar la Operación París para extraer a Lisboa de las autoridades.',
       quote: 'Si tocas a ese perro, te mato antes de que el Profesor termine su frase.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Marsella.jpg'
     },
     {
       id: 'palermo',
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Ingeniero brillante y coautor del golpe al Banco de España junto a Berlín. De temperamento volcánico, carismático y estratega implacable.',
       fullBio: 'Amigo íntimo y enamorado en silencio de Berlín durante años en el monasterio de Florencia. Martín diseñó la hidrodinámica de la cámara sumergida y la extracción del oro por tuberías. Asume el mando operativo dentro del Banco de España, mostrando un liderazgo caótico pero de un intelecto deslumbrante.',
       quote: '¡El plan es una obra de arte, Sergio! ¡Y yo soy quien lo va a dirigir!',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/palermo.jpg'
     },
     {
       id: 'lisboa',
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Inspectora al mando de la negociación en el primer atraco que acaba enamorándose del Profesor y uniéndose a la banda bajo el alias Lisboa.',
       fullBio: 'Brillante estratega policial que descubre la manipulación psicológica del Profesor mientras toma un café con él bajo la identidad de Salvador. Tras entender sus motivos, se pasa al bando de la Resistencia.',
       quote: 'En los atracos, la clave no es el dinero, es ganar tiempo.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/lisboa.jpg'
     },
     {
       id: 'alicia',
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Inspectora al mando de la contrainteligencia en el Banco de España. Negociadora astuta, implacable y dispuesta a cruzar todos los límites éticos.',
       fullBio: 'Especialista en tortura psicológica y manipulación mediática, Alicia logra descubrir el escondite del Profesor en la Parte 4, desencadenando un duelo intelectual épico.',
       quote: 'Yo no juego a la policía buena y al policía malo. Yo soy el policía terrible.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Alicia Sierra.jpg'
     },
     {
       id: 'gandia',
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Exsoldado de Operaciones Especiales y jefe de seguridad del Banco. Letal, fanático del deber y el peor enemigo dentro del asedio.',
       fullBio: 'Entrenado en guerra asimétrica y contrainsurgencia, César Gandía es el enemigo más sanguinario y peligroso que enfrenta la banda dentro del Banco de España. Tras liberarse de sus esposas en la Parte 4, se refugia en la sala de pánico secreta y desata una guerra de guerrillas que culmina con la trágica muerte de Nairobi.',
       quote: 'Ustedes juegan a ser héroes con caretas de plástico. Yo soy un soldado.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Gandia.jpg'
     },
     {
       id: 'estocolmo',
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Secretaria de la F.N.M.T. que sufre el síndrome de Estocolmo tras enamorarse de Denver, convirtiéndose en un miembro oficial en el Banco de España.',
       fullBio: 'Embarazada durante el primer atraco, Mónica encuentra la valentía para tomar las armas y defender a Denver y a la banda frente a los asaltos de las fuerzas especiales.',
       quote: 'Ya no soy una rehén. Soy parte de esto.',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/Estocolmo.jpg'
     },
     {
       id: 'arturo',
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: 'Director cobarde y manipulador que intenta infructuosamente liderar rebeliones entre los rehenes para convertirse en un héroe nacional.',
       fullBio: 'Tras sobrevivir al primer atraco, utiliza su fama mediática para dar charlas motivacionales, colándose de nuevo en el Banco de España buscando atención mediática.',
       quote: '¡Yo soy el héroe de la Fábrica de Moneda!',
-      image: ''
+      image: 'IMAGENES OPTIMIZADAS/ARTURITO.jpg'
     }
   ];
 
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
       episodes: '13 Episodios',
       loot: '2.400 Millones de Euros (Objetivo)',
       synopsis: 'Un misterioso hombre conocido como El Profesor reúne a ocho criminales con habilidades únicas para infiltrarse en la F.N.M.T. Su plan no es robar dinero existente, sino imprimir 2.400 millones de euros en billetes sin marcar mientras mantienen a 67 rehenes durante 11 días.',
-      poster: 'img/hero.png',
+      poster: 'IMAGENES OPTIMIZADAS/temporadas 1.jpg',
       highlights: ['Impresión masiva de billetes nuevos', 'Creación del himno Bella Ciao en la finca', 'Entrada de la Inspectora Raquel Murillo']
     },
     2: {
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
       episodes: '9 Episodios',
       loot: '984 Millones de Euros Extraídos',
       synopsis: 'La policía cerca la Fábrica de Moneda y la tensión interna amenaza con destruir a la banda desde dentro. El Profesor debe ejecutar el Plan Alcatraz para sacar a los supervivientes junto con casi mil millones de euros impresos, sufriendo pérdidas dolorosas en el camino.',
-      poster: 'img/berlin.png',
+      poster: 'IMAGENES OPTIMIZADAS/temporadas 2.jpg',
       highlights: ['Sacrificio heroico de Berlín', 'Escape a través del túnel de Palop', 'Encuentro final en Palawan, Filipinas']
     },
     3: {
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
       episodes: '8 Episodios',
       loot: '90 Toneladas de Oro Puro',
       synopsis: 'Tres años después, Río es capturado por la Interpol. El Profesor reúne nuevamente a la banda con nuevos integrantes (Palermo, Lisboa, Bogotá, Marsella) para realizar un atraco aún mayor al Banco de España y forzar la liberación de Río.',
-      poster: 'img/profesor.png',
+      poster: 'IMAGENES OPTIMIZADAS/temporadas 3.jpg',
       highlights: ['Fundido del oro a granalla milimétrica', 'Apertura de la cámara acorazada sumergida', 'Aparición de la Inspectora Alicia Sierra']
     },
     4: {
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
       episodes: '8 Episodios',
       loot: 'Oro en proceso de extracción',
       synopsis: 'La banda enfrenta su momento más oscuro dentro del banco. Con Nairobi gravemente herida y la amenaza de Gandía (jefe de seguridad del banco) suelto en las instalaciones, El Profesor debe mantener el control psicológico desde el exterior.',
-      poster: 'img/tokio.png',
+      poster: 'IMAGENES OPTIMIZADAS/temporadas 4.jpg',
       highlights: ['Tragedia y despedida de Nairobi', 'Operación París para liberar a Lisboa', 'Alicia Sierra localiza el escondite del Profesor']
     },
     5: {
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
       episodes: '10 Episodios',
       loot: '90 Toneladas de Oro (Convertidas en Latón)',
       synopsis: 'El ejército asalta el Banco de España. En el enfrentamiento final, la banda utiliza el engaño macroeconómico definitivo: sustituir la reserva nacional de oro por lingotes de latón bañados, negociando su libertad como un secreto de Estado.',
-      poster: 'img/hero.png',
+      poster: 'IMAGENES OPTIMIZADAS/temporada 5.jpg',
       highlights: ['Batalla definitiva contra fuerzas especiales', 'El gran truco del Profesor con el Banco Central', 'Comienza una nueva vida para los supervivientes']
     }
   };
