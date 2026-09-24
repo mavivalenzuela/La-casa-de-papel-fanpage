@@ -3069,6 +3069,11 @@ body.page-contacto .feedback-modal-overlay {
    Fiel a la cámara acorazada de acero cepillado con bisagra monolítica izquierda
    ========================================================================== */
 
+/* ==========================================================================
+   ANIMACIÓN CINEMÁTICA DE BÓVEDA BANCARIA (TRANSICIÓN DE PÁGINAS)
+   Video acelerado con oscurecimiento progresivo del interior de la cámara
+   ========================================================================== */
+
 /* Contenedor fijo a pantalla completa */
 .vault-transition-overlay {
   position: fixed;
@@ -3080,8 +3085,8 @@ body.page-contacto .feedback-modal-overlay {
   display: none;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease;
-  background: #0f1113;
+  background: #09090b;
+  transition: opacity 0.4s ease;
 }
 
 .vault-transition-overlay.is-active {
@@ -3092,342 +3097,98 @@ body.page-contacto .feedback-modal-overlay {
   pointer-events: all;
 }
 
-/* Techo iluminado de cámara acorazada con paneles de luz */
-.vault-ceiling {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 16vh;
-  min-height: 80px;
-  max-height: 120px;
-  background: #151719;
-  border-bottom: 3px solid #282d33;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4vw;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.vault-ceiling-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 12px;
-  width: 100%;
-  max-width: 1100px;
-  height: 60%;
-}
-
-.ceiling-panel {
-  background: linear-gradient(180deg, #ffffff 0%, #edf2f7 50%, #cbd5e1 100%);
-  border: 2px solid #2d343b;
-  border-radius: 2px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.8);
-}
-
-/* Suelo de granito / hormigón pulido con reflejo metálico */
-.vault-floor {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 18vh;
-  min-height: 90px;
-  max-height: 130px;
-  background: linear-gradient(180deg, #2d333a 0%, #17191c 100%);
-  border-top: 3px solid #4a545e;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.8);
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.vault-floor::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 15%;
-  right: 15%;
-  bottom: 0;
-  background: radial-gradient(ellipse at top, rgba(210, 225, 240, 0.18) 0%, transparent 75%);
-  pointer-events: none;
-}
-
-.floor-joints {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: space-around;
-  pointer-events: none;
-}
-
-.floor-joint-line {
-  width: 1px;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.05);
-}
-
-/* Paredes laterales de placas de acero cepillado que se abren a los márgenes */
-.vault-wall-left,
-.vault-wall-right {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50vw;
-  z-index: 8;
-  background: linear-gradient(90deg,
-      #4a525b 0%,
-      #6f7a86 20%,
-      #58626d 45%,
-      #818d9a 70%,
-      #4b535b 100%);
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.65);
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-}
-
-.vault-wall-left {
-  left: 0;
-  border-right: 1px solid #16181b;
-}
-
-.vault-wall-right {
-  right: 0;
-  border-left: 1px solid #16181b;
-}
-
-/* Placas de acero con ranuras y remaches industriales */
-.steel-seam-h {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: #1c2024;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-.steel-seam-v {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: #1c2024;
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.15);
-}
-
-.rivets-row {
-  position: absolute;
-  display: flex;
-  gap: 20px;
-}
-
-.rivets-col {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.rivet-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #87929e 50%, #1e2226 100%);
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
-}
-
-/* Escenario 3D Central */
-.vault-stage-3d {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 12;
-  perspective: 1600px;
-  perspective-origin: center center;
-  pointer-events: none;
-}
-
-/* Fondo interior que se revela al abrirse la puerta */
-.vault-portal-interior {
-  position: absolute;
-  width: min(84vmin, 680px);
-  height: min(84vmin, 680px);
-  border-radius: 50%;
-  background: radial-gradient(circle, #e28743 0%, #751a1a 30%, #1c0808 60%, #080303 90%);
-  box-shadow: inset 0 0 90px #000, 0 0 120px rgba(226, 75, 43, 0.45);
-  z-index: 7;
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.5s ease 0.3s, transform 0.8s ease 0.2s;
-}
-
-.is-opening .vault-portal-interior {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Contenedor del ensamblaje de la puerta */
-.vault-door-assembly {
-  width: min(92vmin, 780px);
-  height: min(92vmin, 780px);
+/* Contenedor del video */
+.vault-video-container {
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Elemento SVG de alta fidelidad */
-.vault-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.85));
-  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
 }
 
-/* Grupo oscilante en 3D sobre la bisagra izquierda */
-.vault-door-swing {
-  transform-origin: 23.5% 50%;
-  transform-style: preserve-3d;
-  transition: transform 0.85s cubic-bezier(0.2, 0.85, 0.35, 1), filter 0.85s ease;
+/* Reproductor de video de la bóveda */
+.vault-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(1) contrast(1.05);
+  transition: filter 0.7s ease, transform 0.7s ease;
 }
 
-/* Estado de apertura 3D hacia el espectador y la izquierda */
-.is-opening .vault-door-swing {
-  transform: rotateY(74deg) translateZ(40px);
-  filter: drop-shadow(-45px 20px 55px rgba(0, 0, 0, 0.95));
+/* Oscurecimiento progresivo del video cuando la puerta se abre */
+.vault-video-player.is-darkening {
+  filter: brightness(0.2) contrast(1.3);
+  transform: scale(1.03);
 }
 
-/* Animaciones mecánicas de desbloqueo */
-@keyframes vaultWheelTurn {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  10% {
-    transform: rotate(-20deg);
-  }
-
-  60% {
-    transform: rotate(400deg);
-  }
-
-  85% {
-    transform: rotate(350deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes vaultDialTurn {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes vaultPistonTopRetract {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(32px);
-  }
-}
-
-@keyframes vaultPistonBottomRetract {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(-32px);
-  }
-}
-
-@keyframes vaultDiagTopRetract {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(-20px, 20px);
-  }
-}
-
-@keyframes vaultDiagBottomRetract {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(-20px, -20px);
-  }
-}
-
-.is-unlocking #vaultCenterWheel {
-  animation: vaultWheelTurn 0.65s cubic-bezier(0.3, 0.05, 0.25, 1) forwards;
-}
-
-.is-unlocking #vaultDialKnob {
-  animation: vaultDialTurn 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-}
-
-.is-unlocking #vTopPiston {
-  animation: vaultPistonTopRetract 0.5s ease 0.12s forwards;
-}
-
-.is-unlocking #vBottomPiston {
-  animation: vaultPistonBottomRetract 0.5s ease 0.12s forwards;
-}
-
-.is-unlocking .vault-bolt-diag-top {
-  animation: vaultDiagTopRetract 0.5s ease 0.12s forwards;
-}
-
-.is-unlocking .vault-bolt-diag-bottom {
-  animation: vaultDiagBottomRetract 0.5s ease 0.12s forwards;
-}
-
-/* Desplazamiento hacia los márgenes laterales (Apertura al usuario) */
-.is-parting .vault-wall-left,
-.is-parting .vault-door-assembly {
-  transform: translateX(-110%);
-}
-
-.is-parting .vault-wall-right {
-  transform: translateX(110%);
-}
-
-.is-parting .vault-ceiling {
-  transform: translateY(-110%);
-}
-
-.is-parting .vault-floor {
-  transform: translateY(110%);
-}
-
-.is-parting .vault-portal-interior {
+/* Máscara radial que oscurece específicamente el interior/centro de la bóveda */
+.vault-interior-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(9, 9, 11, 0.96) 0%, rgba(9, 9, 11, 0.75) 42%, rgba(9, 9, 11, 0) 75%);
   opacity: 0;
-  transform: scale(1.6);
-  transition: opacity 0.5s ease, transform 0.75s ease;
+  transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
 }
 
-/* Desvanecimiento final suave */
-.is-cleared {
-  opacity: 0 !important;
-  transition: opacity 0.25s ease !important;
+.vault-interior-vignette.active {
+  opacity: 1;
+}
+
+/* Capa de fundido a negro (#09090b) para conectar perfectamente con la nueva sección */
+.vault-fade-blackout {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #09090b;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 20;
+}
+
+.vault-fade-blackout.active {
+  opacity: 1;
+}
+
+/* Insignia HUD táctica durante la apertura */
+.vault-hud-badge {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(18, 18, 23, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 0.55rem 1.4rem;
+  border-radius: 30px;
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+  color: var(--color-gold);
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85), 0 0 15px rgba(229, 9, 20, 0.35);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.vault-hud-badge.fade-out {
+  opacity: 0;
+}
+
+.vault-hud-badge .hud-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary-red);
+  box-shadow: 0 0 8px var(--color-primary-red);
+  animation: pulseLiveDot 1.2s infinite ease-in-out;
 }
